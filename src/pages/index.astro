@@ -1,11 +1,34 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="1Quest Learn — guided study that meets you where you are"
+  description="Structured learning for UPSC and beyond. Explore topics, build understanding, and study with clarity."
+>
+  <h1 class="page-title">Learn with purpose.</h1>
+  <p class="lede">
+    1Quest Learn is the public home for guides, topic overviews, and study resources —
+    built for learners who want depth without noise.
+  </p>
+
+  <div class="hero-actions">
+    <a class="btn" href="/about/">About 1Quest</a>
+    <a class="btn btn-secondary" href="/contact/">Get in touch</a>
+  </div>
+
+  <section class="card-grid" aria-label="What you'll find here">
+    <article class="card">
+      <h3>Topic guides</h3>
+      <p>Clear overviews and structured paths through syllabus-heavy subjects.</p>
+    </article>
+    <article class="card">
+      <h3>Honest explanations</h3>
+      <p>Content written for understanding — not keyword stuffing or filler.</p>
+    </article>
+    <article class="card">
+      <h3>Room to go deeper</h3>
+      <p>Start on the web, continue in the full 1Quest app when you're ready.</p>
+    </article>
+  </section>
 </Layout>

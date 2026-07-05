@@ -1,0 +1,34 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <p>
+    © {year} 1Quest · <a href="/">1quest.app</a> ·
+    <a href="/about/">About</a> ·
+    <a href="/contact/">Contact</a> ·
+    <a href="/privacy/">Privacy</a>
+  </p>
+</footer>
+
+<style>
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .footer p {
+    margin: 0;
+  }
+
+  .footer a {
+    color: var(--muted);
+  }
+
+  .footer a:hover {
+    color: var(--text);
+  }
+</style>

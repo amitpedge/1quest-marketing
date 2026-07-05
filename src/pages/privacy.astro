@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const updated = new Intl.DateTimeFormat("en-IN", {
+  dateStyle: "long",
+}).format(new Date("2026-07-05"));
+---
+
+<Layout
+  title="Privacy — 1Quest Learn"
+  description="How 1Quest handles data on this marketing site."
+>
+  <h1 class="page-title">Privacy</h1>
+  <p class="lede">A plain-language summary for visitors to this marketing site.</p>
+
+  <div class="prose">
+    <p><em>Last updated: {updated}</em></p>
+
+    <h2>This site</h2>
+    <p>
+      Pages on 1Quest Learn are mostly static. We may use standard analytics (for example Google
+      Analytics or Tag Manager) to understand traffic and improve content. Those tools may set
+      cookies according to their own policies.
+    </p>
+
+    <h2>The 1Quest app</h2>
+    <p>
+      When you sign in to the full product, a separate privacy policy applies to account data,
+      study activity, and billing. This page covers the public marketing site only.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Privacy questions: <a href="mailto:hello@1quest.app">hello@1quest.app</a>
+    </p>
+  </div>
+</Layout>

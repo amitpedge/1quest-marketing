@@ -1,46 +1,27 @@
-# Astro Starter Kit: Basics
+# 1Quest Marketing (Astro)
+
+Public marketing site for **1Quest Learn** — static pages optimized for SEO and Cloudflare Pages deployment.
+
+## Pages
+
+| Route       | File                    |
+| ----------- | ----------------------- |
+| `/`         | `src/pages/index.astro` |
+| `/about/`   | `src/pages/about.astro` |
+| `/contact/` | `src/pages/contact.astro` |
+| `/privacy/` | `src/pages/privacy.astro` |
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # output in ./dist
+npm run preview  # preview production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deploy
 
-## 🚀 Project Structure
+Built for **Cloudflare Pages**: connect this repo, set build command to `npm run build`, output directory to `dist`.
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The main 1Quest app (Remix + Railway) stays separate; link CTAs from here to the app when ready.
