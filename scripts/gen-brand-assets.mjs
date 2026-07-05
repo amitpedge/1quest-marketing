@@ -1,7 +1,8 @@
 // Generates raster brand assets from the vector logo:
 //   public/logo-512.png  — 512×512 transparent PNG (schema publisher logo)
 //   public/og-image.png  — 1200×630 paper-background social/search card
-// Run: node scripts/gen-brand-assets.mjs
+// Requires sharp locally (not a build dependency): npm i -D sharp
+// Run: npm run gen:assets
 import sharp from "sharp";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
