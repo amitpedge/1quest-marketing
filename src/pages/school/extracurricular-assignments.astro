@@ -1,0 +1,187 @@
+---
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import "../../styles/content.css";
+
+const weekplan = [
+  {
+    day: "Day 1",
+    what: "Understand the brief. The agent helps your child figure out their country, committee, and what's actually being asked.",
+  },
+  {
+    day: "Day 2",
+    what: "Find the arguments. Research turns into two or three clear positions, each backed by a real fact.",
+  },
+  {
+    day: "Day 3",
+    what: "Draft the position paper — properly structured: background, stance, and proposed solutions.",
+  },
+  {
+    day: "Day 4",
+    what: "Cut it to the word limit. Your child learns to say the same thing in fewer, sharper words.",
+  },
+  {
+    day: "Day 5",
+    what: "Write the opening speech. One minute, one message, said with confidence.",
+  },
+  {
+    day: "Day 6",
+    what: "Practise out loud. Pace, pauses, and eye contact — rehearsed, not winged.",
+  },
+  {
+    day: "Day 7",
+    what: "Full rehearsal, then a report for you: what's ready, and what still needs a little work.",
+  },
+];
+
+const url = "https://1quest.app/school/extracurricular-assignments/";
+const title =
+  "Model UN, Essays, Debates & Demonstrations: Helping Your Child Prepare | 1Quest";
+const description =
+  "Schools ask for Model UN papers, speeches, debates, and demonstrations — each needing a different skill. Here's how 1Quest patiently teaches your child, locks a plan with you, and executes it over a week.";
+const datePublished = "2026-07-05";
+const dateModified = "2026-07-05";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Model UN, essays, debates, demonstrations — and one calm way through them all.",
+  description,
+  datePublished,
+  dateModified,
+  mainEntityOfPage: url,
+  image: "https://1quest.app/og-image.png",
+  author: { "@type": "Organization", name: "1Quest", url: "https://1quest.app/" },
+  publisher: {
+    "@type": "Organization",
+    name: "1Quest",
+    logo: { "@type": "ImageObject", url: "https://1quest.app/logo-512.png" },
+  },
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://1quest.app/" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "School guides",
+      item: "https://1quest.app/school/",
+    },
+    { "@type": "ListItem", position: 3, name: "Model UN, essays, debates & demonstrations", item: url },
+  ],
+};
+---
+
+<HomeLayout title={title} description={description} jsonLd={[articleSchema, breadcrumb]}>
+  <article class="article">
+    <header class="article__header">
+      <div class="wrap-read">
+        <p class="eyebrow">1Quest for School · Guide</p>
+        <h1 class="article__title">
+          Model UN, essays, debates, demonstrations — and one calm way through them all.
+        </h1>
+        <p class="article__meta">For parents · 6 min read</p>
+        <p class="article__lead">
+          Schools ask for far more than tests now. Here's how to help your child prepare for
+          the endless variety — without becoming an expert in all of it yourself.
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap-read prose-lg">
+      <h2>The assignment isn't the problem. The variety is.</h2>
+      <p>
+        One week it's a Model UN position paper. The next, a two-minute speech. Then a debate
+        rebuttal, a science demonstration, a group presentation, an essay pinned to a strict
+        word limit. Every one of them asks for a <strong>different skill</strong> — research,
+        structure, delivery, timing, persuasion.
+      </p>
+      <p>
+        No parent is fluent in all of that. And here's the quiet unfairness: your child is
+        usually told <em>what</em> to produce, but almost never taught <em>how</em>. So the
+        week becomes a scramble — late nights, half-finished slides, and a child who learned to
+        survive the task without learning to do the next one any better.
+      </p>
+
+      <h2>What your child actually needs is patience, not answers.</h2>
+      <p>
+        A good tutor for this doesn't hand over a finished speech. They teach your child how to
+        build one — and they don't lose patience on the third attempt, or the fifth. That's
+        exactly what 1Quest's agents are built to do.
+      </p>
+      <p>
+        Ask for help with a Model UN position and the agent walks your child through it, step by
+        step: understand the country, find the arguments, structure the paper, tighten it to the
+        word limit. It explains, waits, checks that your child actually followed, and tries
+        again as many times as it takes. The skill stays with your child long after the
+        assignment is handed in.
+      </p>
+      <div class="callout">
+        <p>The goal isn't a better assignment this week. It's a child who can do the next one on their own.</p>
+      </div>
+
+      <h2>You lock a plan with 1Quest in minutes.</h2>
+      <p>
+        You know the deadline and the brief. What you don't have is the hours to run the prep
+        yourself. So you don't have to.
+      </p>
+      <p>
+        Log in as a parent and simply tell the agent what's due: <em>“She has a Model UN
+        conference in a week — a position paper and a one-minute opening speech.”</em> In a short
+        back-and-forth you agree on a plan — what your child will do each day, how long it should
+        take, and what “finished” looks like. You set it once, and you don't have to chase it.
+      </p>
+
+      <h2>Then it works with your child, a little each day.</h2>
+      <p>
+        Over the week, the agent sits with your child and quietly executes the plan — in small
+        sessions that fit around school, never crammed into one panicked night. Here's what a
+        Model UN week can look like:
+      </p>
+      <ul class="weekplan">
+        {
+          weekplan.map((d) => (
+            <li>
+              <span class="weekplan__day">{d.day}</span>
+              <span class="weekplan__what">{d.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p>
+        Each day builds on the last. Your child is learning the craft <em>while</em> producing
+        the work — which is the whole point.
+      </p>
+
+      <h2>And at the end, it reports back to you.</h2>
+      <p>
+        When the week is done — or any time you ask — you get a clear picture: what your child
+        finished, where they did well, and where they struggled. Maybe the research was strong
+        but the speech ran long. You'll know, and so will the agent, which quietly focuses on
+        that next time.
+      </p>
+      <p>
+        It's one plan with two views. Your child sees encouragement and the next small step; you
+        see honest progress. <strong>Same path — it just knows who it's talking to.</strong>
+      </p>
+
+      <h2>Start with one assignment.</h2>
+      <p>
+        Pick the next thing on your child's calendar — a debate, a demonstration, an essay — and
+        let 1Quest run it with them this week. You'll both feel the difference by the weekend.
+      </p>
+    </div>
+  </article>
+
+  <section class="closing">
+    <div class="shell closing__inner">
+      <h2 class="closing__title">Bring a patient tutor to your child's next assignment.</h2>
+      <p class="closing__sub">
+        Free to start. Tell 1Quest what's due, agree on a plan, and let it do the patient part.
+      </p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+  </section>
+</HomeLayout>

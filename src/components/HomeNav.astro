@@ -1,0 +1,29 @@
+---
+const links = [
+  { href: "/#agents", label: "Agents" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#parents", label: "For parents" },
+  { href: "/school/", label: "Guides" },
+  { href: "/about/", label: "About" },
+];
+---
+
+<header class="nav">
+  <div class="nav__shell">
+    <a class="brand" href="/" aria-label="1Quest home">
+      <img class="brand__img" src="/1quest-logo.svg" alt="1Quest" width="2165" height="1237" />
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <div class="nav__right">
+      <div class="switch" role="group" aria-label="Choose your world">
+        <button type="button" data-mode-btn="school" aria-pressed="true">School</button>
+        <button type="button" data-mode-btn="upsc" aria-pressed="false">UPSC</button>
+      </div>
+      <a class="nav__login" href="/contact/">Sign in</a>
+    </div>
+  </div>
+</header>

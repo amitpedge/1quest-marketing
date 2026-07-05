@@ -1,0 +1,42 @@
+/*
+ * 1Quest design tokens — single source of truth.
+ * Palette derived from the Clasico reference (Paper / Sage / Signal Red / Ink).
+ */
+:root {
+  /* Surfaces */
+  --paper: #f3efe5;
+  --paper-deep: #eae3d4;
+  --paper-card: #fbf9f3;
+
+  /* Sage / School world */
+  --sage: #cbdec8;
+  --sage-panel: #dde8da;
+  --green: #2c6e49;
+  --green-deep: #1f5236;
+
+  /* Signal red / UPSC world */
+  --red: #e63329;
+  --red-solid: #d62b20;
+  --red-wash: #f7ddda;
+
+  /* Ink */
+  --ink: #16150f;
+  --ink-muted: #5b564b;
+  --ink-faint: #8a8375;
+
+  /* Lines */
+  --line: rgba(22, 21, 15, 0.14);
+  --line-strong: rgba(22, 21, 15, 0.28);
+
+  /* Type */
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+
+  /* Rhythm */
+  --shell: 70rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  /* Radii */
+  --radius-btn: 0.65rem;
+  --radius-soft: 0.7rem;
+}

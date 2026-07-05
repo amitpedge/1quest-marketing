@@ -1,0 +1,141 @@
+---
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import "../../styles/content.css";
+
+const url = "https://1quest.app/school/patient-ai-tutor/";
+const title = "How AI Can Patiently Teach Your Child (Without Ever Sighing) | 1Quest";
+const description =
+  "The hard part of teaching a child isn't knowing the answer — it's staying patient on the tenth 'I still don't get it.' Here's how an AI tutor teaches differently, and what changes when confusion is finally safe.";
+const datePublished = "2026-07-05";
+const dateModified = "2026-07-05";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How AI can patiently teach your child — without ever sighing.",
+  description,
+  datePublished,
+  dateModified,
+  mainEntityOfPage: url,
+  image: "https://1quest.app/og-image.png",
+  author: { "@type": "Organization", name: "1Quest", url: "https://1quest.app/" },
+  publisher: {
+    "@type": "Organization",
+    name: "1Quest",
+    logo: { "@type": "ImageObject", url: "https://1quest.app/logo-512.png" },
+  },
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://1quest.app/" },
+    { "@type": "ListItem", position: 2, name: "School guides", item: "https://1quest.app/school/" },
+    { "@type": "ListItem", position: 3, name: "How AI can patiently teach your child", item: url },
+  ],
+};
+---
+
+<HomeLayout title={title} description={description} jsonLd={[articleSchema, breadcrumb]}>
+  <article class="article">
+    <header class="article__header">
+      <div class="wrap-read">
+        <p class="eyebrow">1Quest for School · Guide</p>
+        <h1 class="article__title">How AI can patiently teach your child — without ever sighing.</h1>
+        <p class="article__meta">For parents · 5 min read</p>
+        <p class="article__lead">
+          The hard part of teaching a child isn't knowing the answer. It's staying patient on
+          the tenth “I still don't get it.” Here's why that one thing changes everything — and
+          how an AI tutor does it differently.
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap-read prose-lg">
+      <h2>Patience is the scarcest thing in learning.</h2>
+      <p>
+        Think about where your child usually learns. In a classroom, one teacher is moving thirty
+        children through one topic at one pace. If your child falls half a step behind, no one
+        notices — the lesson simply moves on without them.
+      </p>
+      <p>
+        At home it's worse in a different way. Evenings are tired. The first explanation is
+        warm, the second is fine, and by the third “I still don't understand,” the voice gets a
+        little sharper. Your child hears that edge instantly — and quietly decides to stop
+        asking. The problem is almost never ability. It's that there's nowhere safe to be
+        confused, over and over, until it finally clicks.
+      </p>
+
+      <h2>What patience actually looks like.</h2>
+      <p>
+        Real patience isn't repeating the same words more slowly and more loudly. It's something
+        more deliberate:
+      </p>
+      <ul>
+        <li>Re-explaining a <strong>different way</strong> — a new example, a smaller step, a picture instead of words.</li>
+        <li>Checking the child <strong>actually followed</strong>, rather than just nodded along.</li>
+        <li>Letting them be wrong at <strong>no cost</strong> — no sigh, no “we did this yesterday,” no sense that they've disappointed anyone.</li>
+      </ul>
+      <div class="callout">
+        <p>A child learns fastest when being confused is completely, boringly safe.</p>
+      </div>
+
+      <h2>How 1Quest teaches.</h2>
+      <p>
+        1Quest's teaching agent is built around that kind of patience — because a machine has an
+        endless supply of it. It explains a concept at your child's level, then asks a small
+        question back to see whether it actually landed. If it didn't, it doesn't repeat itself.
+        It finds another door in.
+      </p>
+      <div class="dialogue">
+        <p class="dialogue__turn dialogue__turn--tutor">
+          <span class="dialogue__who">1Quest</span>
+          Fractions are just a way of cutting one thing into equal parts. If we cut a roti into
+          4 equal pieces, each piece is one-fourth. So what's two of those pieces?
+        </p>
+        <p class="dialogue__turn dialogue__turn--child">
+          <span class="dialogue__who">Child</span>
+          Two-fourth? I think? I don't really get it.
+        </p>
+        <p class="dialogue__turn dialogue__turn--tutor">
+          <span class="dialogue__who">1Quest</span>
+          That's exactly right — two-fourths. No rush. Let's try it with something you love:
+          if a pizza has 8 slices and you eat 4, how much of the pizza did you eat?
+        </p>
+      </div>
+      <p>
+        It waits. There's no clock, no queue of thirty other students, no adult worn out at the
+        end of the day. And it remembers where your child got stuck last time, so the next
+        session starts exactly there instead of pretending yesterday went perfectly.
+      </p>
+
+      <h2>The quiet change you'll notice.</h2>
+      <p>
+        The first sign it's working is a little surprising: your child starts asking
+        <em>more</em> questions, not fewer. Once asking is free of embarrassment, curiosity
+        comes back.
+      </p>
+      <ul>
+        <li>“I don't get it” becomes a normal sentence, not a confession.</li>
+        <li>Understanding slowly replaces memorising-and-forgetting.</li>
+        <li>Your evenings stop ending in a standoff over homework.</li>
+      </ul>
+
+      <h2>Try it on the thing they keep getting wrong.</h2>
+      <p>
+        Pick the one topic your child quietly dreads — the fractions, the tenses, the chemical
+        equations — and let 1Quest teach it, its patient way, this week. Watch what happens when
+        the sighing stops.
+      </p>
+    </div>
+  </article>
+
+  <section class="closing">
+    <div class="shell closing__inner">
+      <h2 class="closing__title">Give your child a tutor that never runs out of patience.</h2>
+      <p class="closing__sub">Free to start. It explains, waits, and tries again — as many times as it takes.</p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+  </section>
+</HomeLayout>

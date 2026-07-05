@@ -1,0 +1,158 @@
+---
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import "../../styles/content.css";
+
+const url = "https://1quest.app/school/weekly-learning-plan/";
+const title = "Lock a Learning Plan in Minutes, Let 1Quest Run the Week | 1Quest";
+const description =
+  "You know what your child needs to work on. What you don't have is an hour every evening. Here's how 1Quest agrees a week's plan with you in minutes, runs it with your child day by day, and reports back.";
+const datePublished = "2026-07-05";
+const dateModified = "2026-07-05";
+
+const weekplan = [
+  { day: "Day 1", what: "Warm-up. The agent checks what your child already knows and where the gaps really are." },
+  { day: "Day 2", what: "Teach the first hard idea, slowly, with examples your child relates to." },
+  { day: "Day 3", what: "Practise it. A few problems, with instant, gentle correction." },
+  { day: "Day 4", what: "The second concept — built on Day 2, not started from scratch." },
+  { day: "Day 5", what: "Mixed practice, so the two ideas start to connect." },
+  { day: "Day 6", what: "A short self-test to see what's solid and what's shaky." },
+  { day: "Day 7", what: "Revise the shaky bits, then send you the week's report." },
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Lock a plan in five minutes. Let 1Quest run the week.",
+  description,
+  datePublished,
+  dateModified,
+  mainEntityOfPage: url,
+  image: "https://1quest.app/og-image.png",
+  author: { "@type": "Organization", name: "1Quest", url: "https://1quest.app/" },
+  publisher: {
+    "@type": "Organization",
+    name: "1Quest",
+    logo: { "@type": "ImageObject", url: "https://1quest.app/logo-512.png" },
+  },
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://1quest.app/" },
+    { "@type": "ListItem", position: 2, name: "School guides", item: "https://1quest.app/school/" },
+    { "@type": "ListItem", position: 3, name: "Lock a plan with the parent, execute with the child", item: url },
+  ],
+};
+---
+
+<HomeLayout title={title} description={description} jsonLd={[articleSchema, breadcrumb]}>
+  <article class="article">
+    <header class="article__header">
+      <div class="wrap-read">
+        <p class="eyebrow">1Quest for School · Guide</p>
+        <h1 class="article__title">Lock a plan in five minutes. Let 1Quest run the week.</h1>
+        <p class="article__meta">For parents · 5 min read</p>
+        <p class="article__lead">
+          You know what your child needs to work on. What you don't have is an hour every
+          evening to make it happen. Here's how 1Quest takes the plan off your plate — and still
+          keeps you fully in the loop.
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap-read prose-lg">
+      <h2>The gap isn't knowing. It's running it.</h2>
+      <p>
+        Most parents can name the goal without thinking: finish the science chapter before the
+        test, get faster at multiplication, fix the spelling that keeps slipping. Naming it is
+        easy. The hard part is the <strong>daily follow-through</strong> — sitting down each
+        evening, breaking the goal into small steps, and keeping it going when everyone is tired
+        and the day has already been long.
+      </p>
+      <p>
+        That daily grind is exactly the part that falls apart first. Not because anyone stopped
+        caring — because there simply aren't enough evenings in the week.
+      </p>
+
+      <h2>Step 1 — Lock a plan with you, in one short chat.</h2>
+      <p>
+        You open 1Quest as a parent and say the goal in plain words: <em>“He has a math unit
+        test in a week and he's shaky on fractions and decimals.”</em> The agent proposes a
+        plan — what your child will do each day, how long it should take, and what “done” looks
+        like. You nudge it, approve it, and you're finished. About five minutes, once.
+      </p>
+      <div class="factcard">
+        <p class="factcard__k">The plan you agree on</p>
+        <dl>
+          <div><dt>Goal</dt><dd>Confident with fractions &amp; decimals</dd></div>
+          <div><dt>Deadline</dt><dd>Unit test, next Monday</dd></div>
+          <div><dt>Daily time</dt><dd>About 20 minutes, after school</dd></div>
+          <div><dt>Done means</dt><dd>Scores 8/10 on a mixed practice set</dd></div>
+        </dl>
+      </div>
+
+      <h2>Step 2 — It runs the week with your child.</h2>
+      <p>
+        From there, 1Quest quietly executes the plan. Each day is a small session that picks up
+        exactly where yesterday ended. It slows down if your child is struggling and moves ahead
+        if they've got it — and it doesn't need you in the room to do any of it.
+      </p>
+      <ul class="weekplan">
+        {
+          weekplan.map((d) => (
+            <li>
+              <span class="weekplan__day">{d.day}</span>
+              <span class="weekplan__what">{d.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p>
+        Nothing is crammed into one panicked night. The week does the work that a single evening
+        never could.
+      </p>
+
+      <h2>Step 3 — It reports back to you.</h2>
+      <p>
+        At the end of the week — or any moment you ask — you get a clear, honest picture. Not a
+        vague “it went well,” but the specifics you'd actually want to know:
+      </p>
+      <div class="factcard">
+        <p class="factcard__k">Your week's report</p>
+        <dl>
+          <div><dt>Finished</dt><dd>6 of 7 sessions, ~2 hours total</dd></div>
+          <div><dt>Strong</dt><dd>Fractions — now scoring 9/10</dd></div>
+          <div><dt>Still shaky</dt><dd>Converting decimals to fractions</dd></div>
+          <div><dt>Next</dt><dd>Two more short sessions on conversions</dd></div>
+        </dl>
+      </div>
+      <p>
+        You didn't run a single session, and you still know exactly how your child is doing — and
+        what happens next.
+      </p>
+
+      <h2>One plan, two experiences.</h2>
+      <p>
+        Your child never sees a “report.” They see encouragement, a small next step, and no
+        pressure. You see progress and honest feedback. It's the same plan and the same path —
+        it just knows who it's talking to.
+      </p>
+
+      <h2>Set the first plan tonight.</h2>
+      <p>
+        Pick one goal on your child's horizon — a test, a chapter, a weak spot — and spend five
+        minutes locking a plan with 1Quest. Let it run the week. Check the report on Sunday.
+      </p>
+    </div>
+  </article>
+
+  <section class="closing">
+    <div class="shell closing__inner">
+      <h2 class="closing__title">Agree the plan once. Let 1Quest do the daily part.</h2>
+      <p class="closing__sub">Free to start. Five minutes to set up, a week of patient execution, one clear report.</p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+  </section>
+</HomeLayout>

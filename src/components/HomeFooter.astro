@@ -1,0 +1,40 @@
+---
+const year = new Date().getFullYear();
+
+const columns = [
+  { title: "Product", links: ["How it works", "For schools", "For UPSC", "The agents"] },
+  { title: "Company", links: ["About", "Careers", "Contact"] },
+  { title: "Resources", links: ["Help centre", "Blog", "Status", "FAQ"] },
+  { title: "Legal", links: ["Terms", "Privacy", "Refunds"] },
+];
+---
+
+<footer class="foot">
+  <div class="foot__shell">
+    <div class="foot__top">
+      <a class="brand" href="/" aria-label="1Quest home">
+        <img class="brand__img" src="/1quest-logo.svg" alt="1Quest" width="2165" height="1237" />
+      </a>
+      <p class="foot__tag">AI study agents for school and UPSC.</p>
+    </div>
+
+    <div class="foot__grid">
+      {
+        columns.map((col) => (
+          <div class="foot__col">
+            <h3>{col.title}</h3>
+            <ul>
+              {col.links.map((link) => (
+                <li>
+                  <a href="/contact/">{link}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="foot__copy">© {year} 1Quest. All rights reserved.</p>
+  </div>
+</footer>
