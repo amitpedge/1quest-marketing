@@ -182,17 +182,7 @@ const websiteSchema = {
           </p>
         </div>
 
-        <div class="needs__grid">
-          {
-            needs.map((n) => (
-              <article class="need">
-                <span class="need__k">{n.k}</span>
-                <h3>{n.title}</h3>
-                <p>{n.body}</p>
-              </article>
-            ))
-          }
-
+        <div class="needs__lead">
           <article class="need need--feature">
             <div>
               <span class="need__k">Most important</span>
@@ -204,6 +194,18 @@ const websiteSchema = {
               any single exam, and they're where 1Quest spends the most care.
             </p>
           </article>
+        </div>
+
+        <div class="needs__grid">
+          {
+            needs.map((n) => (
+              <article class="need">
+                <span class="need__k">{n.k}</span>
+                <h3>{n.title}</h3>
+                <p>{n.body}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -268,30 +270,6 @@ const websiteSchema = {
       </div>
     </section>
 
-    <!-- PROGRESS -->
-    <section class="progress" id="progress">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">Progress that tracks itself</p>
-          <p class="lead">
-            Everything your child does is recorded as they go — no logging, no spreadsheets.
-            The picture updates in real time and the path evolves with them.
-          </p>
-        </div>
-        <div class="progress__grid">
-          {
-            metrics.map((m) => (
-              <div class="metric">
-                <span class="metric__n">{m.n}</span>
-                <span class="metric__l">{m.l}</span>
-              </div>
-            ))
-          }
-        </div>
-        <p class="progress__note">Illustrative — your child's real numbers appear here once they start.</p>
-      </div>
-    </section>
-
     <!-- STUDENT / PARENT MODES -->
     <section class="modes" id="parents">
       <div class="shell">
@@ -330,6 +308,29 @@ const websiteSchema = {
         <p class="modes__foot">
           Same path. Same agent. It just knows who it's talking to.
         </p>
+      </div>
+    </section>
+
+    <!-- PROGRESS (after parent section — example dashboard) -->
+    <section class="progress progress--compact" id="progress">
+      <div class="shell">
+        <div class="section-head section-head--compact">
+          <p class="eyebrow eyebrow--center">Example dashboard</p>
+          <p class="lead">
+            Everything your child does is recorded as they go — no logging, no spreadsheets.
+          </p>
+        </div>
+        <div class="progress__grid">
+          {
+            metrics.map((m) => (
+              <div class="metric">
+                <span class="metric__n">{m.n}</span>
+                <span class="metric__l">{m.l}</span>
+              </div>
+            ))
+          }
+        </div>
+        <p class="progress__note">Illustrative — your child's real numbers appear here once they start.</p>
       </div>
     </section>
   </div>
@@ -378,12 +379,19 @@ const websiteSchema = {
     </section>
   </div>
 
-  <!-- CLOSING (shared) -->
+  <!-- CLOSING (mode-specific) -->
   <section class="closing">
-    <div class="shell closing__inner">
+    <div class="shell closing__inner mode-block mode-school">
       <h2 class="closing__title">Bring an AI mentor to your child's study table.</h2>
       <p class="closing__sub">
         Free to start. Say what you need, meet the right agent, and watch the path grow.
+      </p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+    <div class="shell closing__inner mode-block mode-upsc">
+      <h2 class="closing__title">Bring a disciplined mentor to your prep desk.</h2>
+      <p class="closing__sub">
+        Free to start. Map the syllabus, drill daily, and get honest answer reviews.
       </p>
       <a class="btn btn--solid" href="/contact/">Start free</a>
     </div>

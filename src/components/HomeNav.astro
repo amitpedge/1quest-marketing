@@ -15,7 +15,9 @@ const links = [
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {links.map(({ href, label }) => <a href={href}>{label}</a>)}
+      {links.map(({ href, label }) => (
+        <a href={href} class:list={[{ "nav__link--desktop": href === "/school/" }]}>{label}</a>
+      ))}
     </nav>
 
     <div class="nav__right">

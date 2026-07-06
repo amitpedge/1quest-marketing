@@ -12,14 +12,14 @@ type treatment, and the signature element — not on inventing new colors.
 ## Palette (source of truth: `src/styles/tokens.css`)
 | Name | Hex | Use |
 |------|-----|-----|
-| Paper | `#F3EFE5` | Page background |
-| Paper deep | `#EAE3D4` | Alternating panels, cards |
-| Sage | `#CBDEC8` | School world, soft panels |
-| Green | `#2C6E49` | School solid accent (AA-safe on paper) |
+| Paper | `#FAFAF8` | Page background |
+| Paper deep | `#F2F2EF` | Alternating panels, cards |
+| Sage | `#D6EBD8` | School world, soft panels |
+| Green | `#2A7A4E` | School solid accent (AA-safe on paper) |
 | Signal red | `#E63329` | Signature accent, badges, UPSC world |
 | Red solid | `#D62B20` | UPSC solid CTA (AA-safe) |
-| Ink | `#16150F` | Text |
-| Ink muted | `#5B564B` | Secondary text |
+| Ink | `#2A2A28` | Text — dark grey |
+| Ink muted | `#5C5C58` | Secondary text |
 
 `--accent` is remapped by mode: **school → green**, **upsc → red**.
 

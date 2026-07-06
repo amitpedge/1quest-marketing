@@ -1,32 +1,32 @@
 /*
  * 1Quest design tokens — single source of truth.
- * Palette derived from the Clasico reference (Paper / Sage / Signal Red / Ink).
+ * Palette: near-white paper, fresh school green, neutral dark grey ink.
  */
 :root {
   /* Surfaces */
-  --paper: #f3efe5;
-  --paper-deep: #eae3d4;
-  --paper-card: #fbf9f3;
+  --paper: #fafaf8;
+  --paper-deep: #f2f2ef;
+  --paper-card: #ffffff;
 
   /* Sage / School world */
-  --sage: #cbdec8;
-  --sage-panel: #dde8da;
-  --green: #2c6e49;
-  --green-deep: #1f5236;
+  --sage: #d6ebd8;
+  --sage-panel: #e4f0e6;
+  --green: #2a7a4e;
+  --green-deep: #1e5c3a;
 
   /* Signal red / UPSC world */
   --red: #e63329;
   --red-solid: #d62b20;
   --red-wash: #f7ddda;
 
-  /* Ink */
-  --ink: #16150f;
-  --ink-muted: #5b564b;
-  --ink-faint: #8a8375;
+  /* Ink — dark grey, not pitch black */
+  --ink: #2a2a28;
+  --ink-muted: #5c5c58;
+  --ink-faint: #8c8c86;
 
   /* Lines */
-  --line: rgba(22, 21, 15, 0.14);
-  --line-strong: rgba(22, 21, 15, 0.28);
+  --line: rgba(42, 42, 40, 0.12);
+  --line-strong: rgba(42, 42, 40, 0.22);
 
   /* Type */
   --font-display: "Newsreader", Georgia, "Times New Roman", serif;

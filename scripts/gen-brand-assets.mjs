@@ -12,8 +12,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const pub = join(root, "public");
 const logoSvg = readFileSync(join(pub, "1quest-logo.svg"));
 
-const PAPER = { r: 243, g: 239, b: 229, alpha: 1 }; // --paper #f3efe5
-const INK = "#16150f";
+const PAPER = { r: 250, g: 250, b: 248, alpha: 1 }; // --paper #fafaf8
+const INK = "#2a2a28";
 
 // 1) Square transparent logo (512×512), logo padded and centred.
 const logo440 = await sharp(logoSvg).resize({ width: 440 }).png().toBuffer();
