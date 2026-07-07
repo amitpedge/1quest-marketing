@@ -3,12 +3,14 @@ import "../styles/tokens.css";
 import "../styles/home.css";
 import HomeNav from "../components/HomeNav.astro";
 import HomeFooter from "../components/HomeFooter.astro";
+import { examFromPathname, resolveExam, type ExamId } from "../lib/exam";
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
   jsonLd?: Record<string, any> | Record<string, any>[];
+  exam?: ExamId;
 }
 
 const {
@@ -16,7 +18,13 @@ const {
   description = "1Quest builds AI study agents for school students and UPSC aspirants.",
   image = "/og-image.png",
   jsonLd,
+  exam: examProp,
 } = Astro.props;
+
+const pathExam = examFromPathname(Astro.url.pathname);
+const agnostic = pathExam === "agnostic";
+const exam = resolveExam(Astro.url.pathname, examProp ?? pathExam);
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const origin = (Astro.site?.toString() ?? "https://1quest.app/").replace(/\/$/, "");
 const ogImage = origin + image;
@@ -68,39 +76,92 @@ const schemas = [organization, ...extraSchemas];
     }
   </head>
   <body>
-    <div class="home" data-mode="school">
-      <HomeNav />
+    <div
+      class="home"
+      data-exam={exam}
+      data-agnostic={agnostic ? "true" : undefined}
+    >
+      <HomeNav exam={exam} agnostic={agnostic} />
       <main>
         <slot />
       </main>
       <HomeFooter />
     </div>
 
-    <script is:inline>
+    <script is:inline define:vars={{ agnostic }}>
       (() => {
         const root = document.querySelector(".home");
         if (!root) return;
-        const buttons = Array.from(document.querySelectorAll("[data-mode-btn]"));
-        const valid = new Set(["school", "upsc"]);
-        const apply = (mode) => {
-          if (!valid.has(mode)) mode = "school";
-          root.setAttribute("data-mode", mode);
-          buttons.forEach((b) =>
-            b.setAttribute("aria-pressed", String(b.dataset.modeBtn === mode))
-          );
-          try {
-            localStorage.setItem("1q-mode", mode);
-          } catch (e) {}
+
+        const valid = new Set(["school", "upsc", "jee", "neet"]);
+
+        const examFromPath = () => {
+          const p = location.pathname;
+          if (p.startsWith("/upsc")) return "upsc";
+          if (p.startsWith("/jee")) return "jee";
+          if (p.startsWith("/neet")) return "neet";
+          if (p.startsWith("/school") || p === "/" || p === "") return "school";
+          return null;
         };
-        buttons.forEach((b) =>
-          b.addEventListener("click", () => apply(b.dataset.modeBtn))
-        );
-        let saved = null;
-        try {
-          saved = localStorage.getItem("1q-mode");
-        } catch (e) {}
-        const fromQuery = new URLSearchParams(location.search).get("exam");
-        apply(fromQuery || saved || root.getAttribute("data-mode") || "school");
+
+        const applyExam = (exam) => {
+          if (!valid.has(exam)) exam = "school";
+          root.setAttribute("data-exam", exam);
+
+          document.querySelectorAll("[data-exam-tab]").forEach((tab) => {
+            const active = tab.dataset.examTab === exam;
+            tab.classList.toggle("exam-tabs__tab--active", active);
+            tab.setAttribute("aria-current", active ? "page" : "false");
+          });
+
+          document.querySelectorAll("[data-subnav]").forEach((el) => {
+            el.hidden = el.dataset.subnav !== exam;
+          });
+
+          document.querySelectorAll("[data-drawer-subnav]").forEach((el) => {
+            el.hidden = el.dataset.drawerSubnav !== exam;
+          });
+        };
+
+        let exam = examFromPath();
+        if (!exam && agnostic) {
+          try {
+            exam = localStorage.getItem("1q-exam");
+          } catch (e) {}
+        }
+        if (!exam || !valid.has(exam)) exam = root.getAttribute("data-exam") || "school";
+        applyExam(exam);
+
+        document.querySelectorAll("[data-exam-tab]").forEach((link) => {
+          link.addEventListener("click", () => {
+            try {
+              localStorage.setItem("1q-exam", link.dataset.examTab);
+            } catch (e) {}
+          });
+        });
+
+        const drawer = document.querySelector("[data-menu-drawer]");
+        const backdrop = document.querySelector("[data-menu-backdrop]");
+        const openBtn = document.querySelector("[data-menu-btn]");
+        const closeBtn = document.querySelector("[data-menu-close]");
+
+        const setMenuOpen = (open) => {
+          if (!drawer || !backdrop || !openBtn) return;
+          drawer.classList.toggle("is-open", open);
+          backdrop.classList.toggle("is-open", open);
+          drawer.setAttribute("aria-hidden", String(!open));
+          backdrop.hidden = !open;
+          openBtn.setAttribute("aria-expanded", String(open));
+          document.body.classList.toggle("menu-open", open);
+        };
+
+        openBtn?.addEventListener("click", () => setMenuOpen(true));
+        closeBtn?.addEventListener("click", () => setMenuOpen(false));
+        backdrop?.addEventListener("click", () => setMenuOpen(false));
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") setMenuOpen(false);
+        });
       })();
     </script>
   </body>

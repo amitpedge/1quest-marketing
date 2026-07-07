@@ -72,8 +72,7 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "1Quest",
   url: "https://1quest.app/",
-  description:
-    "1Quest builds AI study agents for school students and UPSC aspirants.",
+  description: "1Quest builds AI study agents for school students.",
 };
 ---
 
@@ -81,30 +80,19 @@ const websiteSchema = {
   title="1Quest — an AI agent that sits with your child and grows with them"
   description="1Quest gives your child an AI agent for every kind of learning: assignments, chapters, curiosity, practice, and real skills like handwriting, essays, and writing to a word limit. Parents get their own view of the same learning path."
   jsonLd={websiteSchema}
+  exam="school"
 >
-  <!-- HERO -->
   <section class="hero">
     <div class="hero__shell">
       <div class="hero__lede">
-        <div class="mode-block mode-school">
-          <p class="eyebrow">AI study agents · School</p>
-          <h1 class="display">
-            An AI agent that sits with your child — and <em>grows</em> with them.
-          </h1>
-          <p class="sub">
-            1Quest gives your child a companion for every moment of learning — from tonight's
-            assignment to the skills that shape how they think, write, and grow.
-          </p>
-        </div>
-
-        <div class="mode-block mode-upsc">
-          <p class="eyebrow">AI study agents · UPSC</p>
-          <h1 class="display">A <em>patient</em> mentor for every UPSC aspirant.</h1>
-          <p class="sub">
-            1Quest gives you an always-on agent that maps the syllabus, drills prelims,
-            and reviews your answers — in your language, at your pace.
-          </p>
-        </div>
+        <p class="eyebrow">AI study agents · School</p>
+        <h1 class="display">
+          An AI agent that sits with your child — and <em>grows</em> with them.
+        </h1>
+        <p class="sub">
+          1Quest gives your child a companion for every moment of learning — from tonight's
+          assignment to the skills that shape how they think, write, and grow.
+        </p>
 
         <div class="hero__cta">
           <a class="btn btn--solid" href="/contact/">Start free</a>
@@ -113,8 +101,7 @@ const websiteSchema = {
 
         <p class="agents">
           <span class="agents__label">Your agents</span>
-          <span class="mode-inline mode-school">Assignment Solver · Teacher · Grading · a dozen skill agents</span>
-          <span class="mode-inline mode-upsc">Planner · Prelims Coach · Answer Reviewer</span>
+          Assignment Solver · Teacher · Grading · a dozen skill agents
         </p>
       </div>
 
@@ -122,23 +109,13 @@ const websiteSchema = {
         <div class="chatcard">
           <div class="chatcard__head">
             <span class="chatcard__eyebrow">1Quest agent</span>
-            <span class="chatcard__name mode-block mode-school">Teacher Agent</span>
-            <span class="chatcard__name mode-block mode-upsc">Prelims Coach</span>
+            <span class="chatcard__name">Teacher Agent</span>
           </div>
           <div class="chatcard__body">
-            <p class="bubble bubble--in mode-block mode-school">
-              Why does the moon change its shape?
-            </p>
-            <p class="bubble bubble--in mode-block mode-upsc">
-              Explain the Doctrine of Lapse in two lines.
-            </p>
-            <p class="bubble bubble--out mode-block mode-school">
+            <p class="bubble bubble--in">Why does the moon change its shape?</p>
+            <p class="bubble bubble--out">
               We only see the lit-up part of the Moon. As it orbits Earth, that lit part
               faces us differently — so it looks like it changes shape!
-            </p>
-            <p class="bubble bubble--out mode-block mode-upsc">
-              Annexation policy under Dalhousie: if a ruler died without a natural heir,
-              the state lapsed to the Company. It fuelled resentment before 1857.
             </p>
           </div>
           <div class="chatcard__foot">
@@ -149,7 +126,6 @@ const websiteSchema = {
     </div>
   </section>
 
-  <!-- APP DOWNLOAD (shared, second section) -->
   <section class="appcta" id="download">
     <div class="shell appcta__inner">
       <img class="appcta__icon" src="/1quest-monogram.svg" alt="1Quest app icon" width="940" height="865" />
@@ -168,270 +144,209 @@ const websiteSchema = {
     </div>
   </section>
 
-  <!-- ============ SCHOOL TRACK ============ -->
-  <div class="track mode-school mode-block">
-    <!-- NEEDS -->
-    <section class="needs" id="needs">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">One agent for every kind of learning</p>
-          <p class="lead">
-            Children don't learn in one mode. 1Quest meets each moment — homework, a new
-            chapter, an odd question at dinner, or the long work of getting genuinely good
-            at something.
-          </p>
-        </div>
+  <section class="needs" id="needs">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">One agent for every kind of learning</p>
+        <p class="lead">
+          Children don't learn in one mode. 1Quest meets each moment — homework, a new
+          chapter, an odd question at dinner, or the long work of getting genuinely good
+          at something.
+        </p>
+      </div>
 
-        <div class="needs__lead">
-          <article class="need need--feature">
-            <div>
-              <span class="need__k">Most important</span>
-              <h3>Building real skills</h3>
+      <div class="needs__lead">
+        <article class="need need--feature">
+          <div>
+            <span class="need__k">Most important</span>
+            <h3>Building real skills</h3>
+          </div>
+          <p>
+            Better handwriting. Essay writing. Structuring an answer. Learning to think —
+            and to say it clearly within a word limit. These are the skills that outlast
+            any single exam, and they're where 1Quest spends the most care.
+          </p>
+        </article>
+      </div>
+
+      <div class="needs__grid">
+        {
+          needs.map((n) => (
+            <article class="need">
+              <span class="need__k">{n.k}</span>
+              <h3>{n.title}</h3>
+              <p>{n.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="agentsec" id="agents">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">Meet the agents</p>
+        <p class="lead">
+          Not one chatbot trying to do everything. A small team of specialists, each
+          good at one job.
+        </p>
+      </div>
+
+      <div class="agentgrid">
+        {
+          agents.map((a) => (
+            <article class="agent">
+              <span class="agent__k">{a.k}</span>
+              <h3 class="agent__name">{a.name}</h3>
+              <p>{a.body}</p>
+            </article>
+          ))
+        }
+
+        <article class="agent agent--wide">
+          <span class="agent__k">The specialists</span>
+          <h3 class="agent__name">Almost a dozen micro-agents</h3>
+          <p>
+            Behind the scenes, a set of focused agents each teach a single skill —
+            handwriting, essay craft, answer structure, writing to a word limit, and
+            more. Your child never has to pick one; the right specialist simply shows up
+            when it's needed.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">How it works</p>
+        <p class="lead">
+          No dashboard to learn. Your child just says what they want to do — and 1Quest
+          figures out the rest.
+        </p>
+      </div>
+      <div class="how__grid">
+        {
+          steps.map((s) => (
+            <article class="step">
+              <span class="step__n">{s.n}</span>
+              <h3 class="step__title">{s.title}</h3>
+              <p class="step__body">{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="modes" id="parents">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">One path, two conversations</p>
+        <p class="lead">
+          There's a single learning path for your child — and it speaks to the student and
+          to the parent in two different voices.
+        </p>
+      </div>
+
+      <div class="modes__grid">
+        <article class="modecol modecol--student">
+          <span class="modecol__tag">Student</span>
+          <h3>The one who's learning</h3>
+          <p>Your child works with the agents directly — encouraged, quizzed, and guided.</p>
+          <ul>
+            <li>Asks for help in plain words</li>
+            <li>Gets taught, not just answered</li>
+            <li>Sees their own streaks and wins</li>
+          </ul>
+        </article>
+
+        <article class="modecol modecol--parent">
+          <span class="modecol__tag">Parent</span>
+          <h3>The one who's guiding</h3>
+          <p>Log in as a parent and talk to the very same agent about your child.</p>
+          <ul>
+            <li>Agree on a learning path together</li>
+            <li>Ask it to set assignments for your child</li>
+            <li>Get reports: strong areas, weak areas, what's next</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="modes__foot">
+        Same path. Same agent. It just knows who it's talking to.
+      </p>
+    </div>
+  </section>
+
+  <section class="trust" id="trust">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">For parents who've said no to ChatGPT</p>
+        <h2 class="display-sm trust__title">
+          We built this for parents who don't want AI doing the work.
+        </h2>
+        <p class="lead center">
+          If you've steered your child away from generic AI for homework, that instinct
+          makes sense. A chatbot is optimised for a finished answer. 1Quest is optimised
+          for understanding — patiently, step by step, with you still in the loop.
+        </p>
+      </div>
+
+      <div class="trust__grid">
+        <article class="trust__card">
+          <span class="trust__k">The goal</span>
+          <p class="trust__not">A chatbot hands over the answer.</p>
+          <p class="trust__is">1Quest teaches your child the method — so the next assignment gets easier too.</p>
+        </article>
+        <article class="trust__card">
+          <span class="trust__k">How it teaches</span>
+          <p class="trust__not">One prompt, one reply, move on.</p>
+          <p class="trust__is">It explains, waits, checks they followed, and tries again — as many times as it takes.</p>
+        </article>
+        <article class="trust__card">
+          <span class="trust__k">Your visibility</span>
+          <p class="trust__not">You don't know what happened on the screen.</p>
+          <p class="trust__is">You agree the plan upfront. You get an honest report when the week is done.</p>
+        </article>
+      </div>
+
+      <p class="trust__foot">
+        Same worry you had — addressed by design, not by promise.
+        <a href="/school/patient-ai-tutor/">Read how patient teaching works →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="progress progress--compact" id="progress">
+    <div class="shell">
+      <div class="section-head section-head--compact">
+        <p class="eyebrow eyebrow--center">Example dashboard</p>
+        <p class="lead">
+          Everything your child does is recorded as they go — no logging, no spreadsheets.
+        </p>
+      </div>
+      <div class="progress__grid">
+        {
+          metrics.map((m) => (
+            <div class="metric">
+              <span class="metric__n">{m.n}</span>
+              <span class="metric__l">{m.l}</span>
             </div>
-            <p>
-              Better handwriting. Essay writing. Structuring an answer. Learning to think —
-              and to say it clearly within a word limit. These are the skills that outlast
-              any single exam, and they're where 1Quest spends the most care.
-            </p>
-          </article>
-        </div>
-
-        <div class="needs__grid">
-          {
-            needs.map((n) => (
-              <article class="need">
-                <span class="need__k">{n.k}</span>
-                <h3>{n.title}</h3>
-                <p>{n.body}</p>
-              </article>
-            ))
-          }
-        </div>
+          ))
+        }
       </div>
-    </section>
+      <p class="progress__note">Illustrative — your child's real numbers appear here once they start.</p>
+    </div>
+  </section>
 
-    <!-- AGENTS -->
-    <section class="agentsec" id="agents">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">Meet the agents</p>
-          <p class="lead">
-            Not one chatbot trying to do everything. A small team of specialists, each
-            good at one job.
-          </p>
-        </div>
-
-        <div class="agentgrid">
-          {
-            agents.map((a) => (
-              <article class="agent">
-                <span class="agent__k">{a.k}</span>
-                <h3 class="agent__name">{a.name}</h3>
-                <p>{a.body}</p>
-              </article>
-            ))
-          }
-
-          <article class="agent agent--wide">
-            <span class="agent__k">The specialists</span>
-            <h3 class="agent__name">Almost a dozen micro-agents</h3>
-            <p>
-              Behind the scenes, a set of focused agents each teach a single skill —
-              handwriting, essay craft, answer structure, writing to a word limit, and
-              more. Your child never has to pick one; the right specialist simply shows up
-              when it's needed.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="how" id="how">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">How it works</p>
-          <p class="lead">
-            No dashboard to learn. Your child just says what they want to do — and 1Quest
-            figures out the rest.
-          </p>
-        </div>
-        <div class="how__grid">
-          {
-            steps.map((s) => (
-              <article class="step">
-                <span class="step__n">{s.n}</span>
-                <h3 class="step__title">{s.title}</h3>
-                <p class="step__body">{s.body}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- STUDENT / PARENT MODES -->
-    <section class="modes" id="parents">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">One path, two conversations</p>
-          <p class="lead">
-            There's a single learning path for your child — and it speaks to the student and
-            to the parent in two different voices.
-          </p>
-        </div>
-
-        <div class="modes__grid">
-          <article class="modecol modecol--student">
-            <span class="modecol__tag">Student</span>
-            <h3>The one who's learning</h3>
-            <p>Your child works with the agents directly — encouraged, quizzed, and guided.</p>
-            <ul>
-              <li>Asks for help in plain words</li>
-              <li>Gets taught, not just answered</li>
-              <li>Sees their own streaks and wins</li>
-            </ul>
-          </article>
-
-          <article class="modecol modecol--parent">
-            <span class="modecol__tag">Parent</span>
-            <h3>The one who's guiding</h3>
-            <p>Log in as a parent and talk to the very same agent about your child.</p>
-            <ul>
-              <li>Agree on a learning path together</li>
-              <li>Ask it to set assignments for your child</li>
-              <li>Get reports: strong areas, weak areas, what's next</li>
-            </ul>
-          </article>
-        </div>
-
-        <p class="modes__foot">
-          Same path. Same agent. It just knows who it's talking to.
-        </p>
-      </div>
-    </section>
-
-    <!-- PARENT TRUST — Option A: not an answer machine -->
-    <section class="trust" id="trust">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">For parents who've said no to ChatGPT</p>
-          <h2 class="display-sm trust__title">
-            We built this for parents who don't want AI doing the work.
-          </h2>
-          <p class="lead center">
-            If you've steered your child away from generic AI for homework, that instinct
-            makes sense. A chatbot is optimised for a finished answer. 1Quest is optimised
-            for understanding — patiently, step by step, with you still in the loop.
-          </p>
-        </div>
-
-        <div class="trust__grid">
-          <article class="trust__card">
-            <span class="trust__k">The goal</span>
-            <p class="trust__not">A chatbot hands over the answer.</p>
-            <p class="trust__is">1Quest teaches your child the method — so the next assignment gets easier too.</p>
-          </article>
-          <article class="trust__card">
-            <span class="trust__k">How it teaches</span>
-            <p class="trust__not">One prompt, one reply, move on.</p>
-            <p class="trust__is">It explains, waits, checks they followed, and tries again — as many times as it takes.</p>
-          </article>
-          <article class="trust__card">
-            <span class="trust__k">Your visibility</span>
-            <p class="trust__not">You don't know what happened on the screen.</p>
-            <p class="trust__is">You agree the plan upfront. You get an honest report when the week is done.</p>
-          </article>
-        </div>
-
-        <p class="trust__foot">
-          Same worry you had — addressed by design, not by promise.
-          <a href="/school/patient-ai-tutor/">Read how patient teaching works →</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- PROGRESS (after parent section — example dashboard) -->
-    <section class="progress progress--compact" id="progress">
-      <div class="shell">
-        <div class="section-head section-head--compact">
-          <p class="eyebrow eyebrow--center">Example dashboard</p>
-          <p class="lead">
-            Everything your child does is recorded as they go — no logging, no spreadsheets.
-          </p>
-        </div>
-        <div class="progress__grid">
-          {
-            metrics.map((m) => (
-              <div class="metric">
-                <span class="metric__n">{m.n}</span>
-                <span class="metric__l">{m.l}</span>
-              </div>
-            ))
-          }
-        </div>
-        <p class="progress__note">Illustrative — your child's real numbers appear here once they start.</p>
-      </div>
-    </section>
-  </div>
-
-  <!-- ============ UPSC TRACK (compact) ============ -->
-  <div class="track mode-upsc mode-block">
-    <section class="upsc-brief" id="upsc-how">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">For UPSC aspirants</p>
-          <h2 class="display-sm">A disciplined mentor for the long haul.</h2>
-          <p class="lead center">
-            1Quest plans your prep, drills prelims daily, and reviews mains answers with the
-            honesty a rank demands.
-          </p>
-        </div>
-
-        <div class="agentgrid agentgrid--upsc">
-          <article class="agent">
-            <span class="agent__k">Agent</span>
-            <h3 class="agent__name">Planner</h3>
-            <p>A syllabus plan you can actually trust — and adjust as you go.</p>
-          </article>
-          <article class="agent">
-            <span class="agent__k">Agent</span>
-            <h3 class="agent__name">Prelims Coach</h3>
-            <p>Daily, targeted drills that find and fix your weak spots.</p>
-          </article>
-          <article class="agent">
-            <span class="agent__k">Agent</span>
-            <h3 class="agent__name">Answer Reviewer</h3>
-            <p>Honest mains feedback on structure, content, and word discipline.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote">
-      <div class="shell quote__shell">
-        <blockquote class="quote__text">
-          “I stopped drowning in PDFs. My agent knew where I'd left off, what I kept getting
-          wrong, and what to revise next. It felt like studying with someone.”
-        </blockquote>
-        <p class="quote__cite">Priya Sharma · UPSC aspirant, Jaipur</p>
-      </div>
-    </section>
-  </div>
-
-  <!-- CLOSING (mode-specific) -->
   <section class="closing">
-    <div class="shell closing__inner mode-block mode-school">
+    <div class="shell closing__inner">
       <h2 class="closing__title">Bring an AI mentor to your child's study table.</h2>
       <p class="closing__sub">
         Free to start. Say what you need, meet the right agent, and watch the path grow.
-      </p>
-      <a class="btn btn--solid" href="/contact/">Start free</a>
-    </div>
-    <div class="shell closing__inner mode-block mode-upsc">
-      <h2 class="closing__title">Bring a disciplined mentor to your prep desk.</h2>
-      <p class="closing__sub">
-        Free to start. Map the syllabus, drill daily, and get honest answer reviews.
       </p>
       <a class="btn btn--solid" href="/contact/">Start free</a>
     </div>

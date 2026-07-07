@@ -1,0 +1,129 @@
+---
+import HomeLayout from "../../layouts/HomeLayout.astro";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "1Quest UPSC",
+  url: "https://1quest.app/upsc/",
+  description: "1Quest builds AI study agents for UPSC aspirants.",
+};
+---
+
+<HomeLayout
+  title="1Quest UPSC — a patient mentor for every aspirant"
+  description="1Quest gives UPSC aspirants an always-on agent that maps the syllabus, drills prelims, and reviews mains answers — in your language, at your pace."
+  jsonLd={websiteSchema}
+  exam="upsc"
+>
+  <section class="hero">
+    <div class="hero__shell">
+      <div class="hero__lede">
+        <p class="eyebrow">AI study agents · UPSC</p>
+        <h1 class="display">A <em>patient</em> mentor for every UPSC aspirant.</h1>
+        <p class="sub">
+          1Quest gives you an always-on agent that maps the syllabus, drills prelims,
+          and reviews your answers — in your language, at your pace.
+        </p>
+
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="/contact/">Start free</a>
+          <a class="btn btn--ghost" href="#how">See how it works</a>
+        </div>
+
+        <p class="agents">
+          <span class="agents__label">Your agents</span>
+          Planner · Prelims Coach · Answer Reviewer
+        </p>
+      </div>
+
+      <div class="hero__art" aria-hidden="true">
+        <div class="chatcard">
+          <div class="chatcard__head">
+            <span class="chatcard__eyebrow">1Quest agent</span>
+            <span class="chatcard__name">Prelims Coach</span>
+          </div>
+          <div class="chatcard__body">
+            <p class="bubble bubble--in">Explain the Doctrine of Lapse in two lines.</p>
+            <p class="bubble bubble--out">
+              Annexation policy under Dalhousie: if a ruler died without a natural heir,
+              the state lapsed to the Company. It fuelled resentment before 1857.
+            </p>
+          </div>
+          <div class="chatcard__foot">
+            <span class="pulse"></span> Always on · answers at your pace
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="appcta" id="download">
+    <div class="shell appcta__inner">
+      <img class="appcta__icon" src="/1quest-monogram.svg" alt="1Quest app icon" width="940" height="865" />
+      <div class="appcta__text">
+        <h2 class="appcta__title">Download the app — right away.</h2>
+        <p class="appcta__sub">Get 1Quest on the App Store and Play Store, and start today.</p>
+      </div>
+      <div class="appcta__badges">
+        <a class="appcta__badge" href="/contact/" aria-label="Download on the App Store">
+          <img src="/appstore-badge.svg" alt="Download on the App Store" width="168" height="50" />
+        </a>
+        <a class="appcta__badge" href="/contact/" aria-label="Get it on Google Play">
+          <img src="/googleplay-badge.svg" alt="Get it on Google Play" width="180" height="50" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="upsc-brief" id="how">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">For UPSC aspirants</p>
+        <h2 class="display-sm">A disciplined mentor for the long haul.</h2>
+        <p class="lead center">
+          1Quest plans your prep, drills prelims daily, and reviews mains answers with the
+          honesty a rank demands.
+        </p>
+      </div>
+
+      <div class="agentgrid agentgrid--upsc" id="agents">
+        <article class="agent">
+          <span class="agent__k">Agent</span>
+          <h3 class="agent__name">Planner</h3>
+          <p>A syllabus plan you can actually trust — and adjust as you go.</p>
+        </article>
+        <article class="agent">
+          <span class="agent__k">Agent</span>
+          <h3 class="agent__name">Prelims Coach</h3>
+          <p>Daily, targeted drills that find and fix your weak spots.</p>
+        </article>
+        <article class="agent">
+          <span class="agent__k">Agent</span>
+          <h3 class="agent__name">Answer Reviewer</h3>
+          <p>Honest mains feedback on structure, content, and word discipline.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote">
+    <div class="shell quote__shell">
+      <blockquote class="quote__text">
+        “I stopped drowning in PDFs. My agent knew where I'd left off, what I kept getting
+        wrong, and what to revise next. It felt like studying with someone.”
+      </blockquote>
+      <p class="quote__cite">Priya Sharma · UPSC aspirant, Jaipur</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="shell closing__inner">
+      <h2 class="closing__title">Bring a disciplined mentor to your prep desk.</h2>
+      <p class="closing__sub">
+        Free to start. Map the syllabus, drill daily, and get honest answer reviews.
+      </p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+  </section>
+</HomeLayout>

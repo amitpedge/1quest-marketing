@@ -1,81 +1,218 @@
 ---
-const navByExam = {
+import type { ExamId } from "../lib/exam";
+
+interface Props {
+  exam: ExamId;
+  agnostic?: boolean;
+}
+
+const { exam, agnostic = false } = Astro.props;
+
+const navByExam: Record<ExamId, { href: string; label: string }[]> = {
   school: [
     { href: "/#agents", label: "Agents" },
     { href: "/#how", label: "How it works" },
     { href: "/#parents", label: "For parents" },
-    { href: "/#trust", label: "Why 1Quest" },
     { href: "/school/", label: "Guides" },
-    { href: "/about/", label: "About" },
+    { href: "/#trust", label: "Why 1Quest" },
   ],
   upsc: [
-    { href: "/#upsc-how", label: "Agents" },
-    { href: "/#upsc-how", label: "Prelims & mains" },
-    { href: "/#download", label: "Get the app" },
-    { href: "/about/", label: "About" },
+    { href: "/upsc/#agents", label: "Agents" },
+    { href: "/upsc/#how", label: "Prelims & mains" },
+    { href: "/upsc/#download", label: "Get the app" },
   ],
+  jee: [],
+  neet: [],
 };
 
-const exams = [
-  { id: "school", label: "School", short: "Sch", active: true },
-  { id: "jee", label: "JEE", short: "JEE", active: false },
-  { id: "neet", label: "NEET", short: "NEET", active: false },
-  { id: "upsc", label: "UPSC", short: "UPSC", active: true },
+const menuLinks = [
+  { href: "/about/", label: "About" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/privacy/", label: "Privacy" },
 ];
+
+const exams: {
+  id: ExamId;
+  label: string;
+  short: string;
+  href: string;
+  enabled: boolean;
+}[] = [
+  { id: "school", label: "School", short: "Sch", href: "/", enabled: true },
+  { id: "upsc", label: "UPSC", short: "UPSC", href: "/upsc/", enabled: true },
+  { id: "jee", label: "JEE", short: "JEE", href: "/jee/", enabled: false },
+  { id: "neet", label: "NEET", short: "NEET", href: "/neet/", enabled: false },
+];
+
+const MOBILE_SUBNAV = 4;
+const DESKTOP_SUBNAV = 6;
+
+function splitSubnav(links: { href: string; label: string }[]) {
+  return {
+    visibleMobile: links.slice(0, MOBILE_SUBNAV),
+    overflowMobile: links.slice(MOBILE_SUBNAV),
+    visibleDesktop: links.slice(0, DESKTOP_SUBNAV),
+    overflowDesktop: links.slice(DESKTOP_SUBNAV),
+  };
+}
 ---
 
-<header class="nav">
-  <div class="nav__shell">
-    <a class="brand" href="/" aria-label="1Quest home">
-      <img class="brand__img" src="/1quest-logo.svg" alt="1Quest" width="2165" height="1237" />
-    </a>
+<header class="masthead">
+  <div class="masthead__shell">
+    <div class="masthead__row masthead__row--main">
+      <button
+        type="button"
+        class="masthead__menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="masthead-drawer"
+        data-menu-btn
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"></path>
+        </svg>
+      </button>
 
-    <nav class="nav__links" aria-label="Primary">
-      {
-        Object.entries(navByExam).map(([exam, links]) => (
-          <div class={`nav-set mode-${exam}`} data-nav-set={exam}>
-            {links.map(({ href, label }) => (
-              <a href={href}>{label}</a>
-            ))}
-          </div>
-        ))
-      }
-    </nav>
+      <a class="brand masthead__brand" href="/" aria-label="1Quest home">
+        <img
+          class="brand__img"
+          src="/1quest-logo.svg"
+          alt="1Quest"
+          width="2165"
+          height="1237"
+        />
+      </a>
 
-    <div class="nav__right">
-      <div class="exam-bar" role="group" aria-label="Choose your exam">
-        <span class="exam-bar__k">Exam</span>
-        <div class="exam-bar__options">
-          {
-            exams.map(({ id, label, short, active }) =>
-              active ? (
-                <button
-                  type="button"
-                  class="exam-bar__opt"
-                  data-mode-btn={id}
-                  aria-pressed={id === "school" ? "true" : "false"}
-                >
-                  <span class="exam-bar__long">{label}</span>
-                  <span class="exam-bar__short">{short}</span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  class="exam-bar__opt exam-bar__opt--soon"
-                  disabled
-                  aria-disabled="true"
-                  title="Coming soon"
-                >
-                  <span class="exam-bar__long">{label}</span>
-                  <span class="exam-bar__short">{short}</span>
-                  <span class="exam-bar__badge">Soon</span>
-                </button>
-              )
+      <nav class="exam-tabs" aria-label="Choose exam">
+        {
+          exams.map(({ id, label, short, href, enabled }) =>
+            enabled ? (
+              <a
+                class="exam-tabs__tab"
+                href={href}
+                data-exam-tab={id}
+                aria-current={!agnostic && exam === id ? "page" : undefined}
+              >
+                <span class="exam-tabs__long">{label}</span>
+                <span class="exam-tabs__short">{short}</span>
+              </a>
+            ) : (
+              <span class="exam-tabs__tab exam-tabs__tab--soon" aria-disabled="true" title="Coming soon">
+                <span class="exam-tabs__long">{label}</span>
+                <span class="exam-tabs__short">{short}</span>
+                <span class="exam-tabs__badge">Soon</span>
+              </span>
             )
-          }
-        </div>
-      </div>
-      <a class="nav__login" href="https://app.1quest.app/">Sign in</a>
+          )
+        }
+      </nav>
+
+      <a class="masthead__user" href="/contact/" aria-label="Contact us">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle>
+          <path
+            d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"></path>
+        </svg>
+      </a>
     </div>
+
+    {
+      (["school", "upsc"] as ExamId[]).map((examId) => {
+        const links = navByExam[examId];
+        if (!links.length) return null;
+        const split = splitSubnav(links);
+        return (
+          <nav
+            class="subnav"
+            data-subnav={examId}
+            aria-label={`${examId} sections`}
+            hidden={!agnostic && exam !== examId}
+          >
+            <div class="subnav__visible subnav__visible--mobile">
+              {split.visibleMobile.map(({ href, label }) => (
+                <a class="subnav__link" href={href}>
+                  {label}
+                </a>
+              ))}
+            </div>
+            <div class="subnav__visible subnav__visible--desktop">
+              {split.visibleDesktop.map(({ href, label }) => (
+                <a class="subnav__link" href={href}>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </nav>
+        );
+      })
+    }
   </div>
+
+  <div class="masthead__backdrop" data-menu-backdrop hidden></div>
+
+  <aside
+    id="masthead-drawer"
+    class="masthead__drawer"
+    aria-label="Site menu"
+    aria-hidden="true"
+    data-menu-drawer
+  >
+    <div class="masthead__drawer-head">
+      <span class="masthead__drawer-title">Menu</span>
+      <button type="button" class="masthead__drawer-close" aria-label="Close menu" data-menu-close>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+
+    {
+      (["school", "upsc"] as ExamId[]).map((examId) => {
+        const links = navByExam[examId];
+        const split = splitSubnav(links);
+        const overflow = [
+          ...new Map(
+            [...split.overflowMobile, ...split.overflowDesktop].map((l) => [l.href, l])
+          ).values(),
+        ];
+        if (!overflow.length) return null;
+        return (
+          <div class="masthead__drawer-section" data-drawer-subnav={examId} hidden={!agnostic && exam !== examId}>
+            <p class="masthead__drawer-k">{examId === "school" ? "School" : "UPSC"}</p>
+            <ul class="masthead__drawer-list">
+              {overflow.map(({ href, label }) => (
+                <li>
+                  <a href={href}>{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })
+    }
+
+    <div class="masthead__drawer-section">
+      <p class="masthead__drawer-k">Pages</p>
+      <ul class="masthead__drawer-list">
+        {
+          menuLinks.map(({ href, label }) => (
+            <li>
+              <a href={href}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </aside>
 </header>
