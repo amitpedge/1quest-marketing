@@ -182,8 +182,7 @@ body.menu-open {
   padding-inline: var(--gutter);
 }
 .masthead__row--main {
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  display: flex;
   align-items: center;
   gap: 0.65rem 0.75rem;
   padding: 0.75rem 0 0.55rem;
@@ -220,13 +219,15 @@ body.menu-open {
 }
 .exam-tabs {
   display: inline-flex;
-  justify-self: center;
+  flex: 1;
+  justify-content: center;
   gap: 0.15rem;
   padding: 0.18rem;
   border: 1px solid var(--line-strong);
   background: var(--paper-card);
   border-radius: 0.6rem;
   overflow-x: auto;
+  min-width: 0;
   max-width: 100%;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -267,10 +268,17 @@ body.menu-open {
   color: var(--ink-faint);
 }
 .subnav {
-  display: block;
+  display: none;
   padding: 0 0 0.65rem;
   overflow-x: auto;
   scrollbar-width: none;
+}
+.home[data-exam="school"] .subnav[data-subnav="school"],
+.home[data-exam="upsc"] .subnav[data-subnav="upsc"] {
+  display: block;
+}
+.subnav[hidden] {
+  display: none !important;
 }
 .subnav::-webkit-scrollbar {
   display: none;
@@ -366,6 +374,13 @@ body.menu-open {
 .masthead__drawer-list a:hover {
   color: var(--accent);
 }
+.home [data-drawer-subnav] {
+  display: none;
+}
+.home[data-exam="school"] [data-drawer-subnav="school"],
+.home[data-exam="upsc"] [data-drawer-subnav="upsc"] {
+  display: block;
+}
 @media (max-width: 520px) {
   .exam-tabs__long {
     display: none;
@@ -376,11 +391,10 @@ body.menu-open {
   .exam-tabs__tab--soon .exam-tabs__badge {
     display: none;
   }
-  .masthead__row--main {
-    grid-template-columns: auto minmax(0, 1fr) auto auto;
-  }
+}
+@media (max-width: 767px) {
   .exam-tabs {
-    justify-self: stretch;
+    flex: 1 1 auto;
   }
 }
 @media (min-width: 768px) {

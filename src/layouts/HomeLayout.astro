@@ -113,14 +113,6 @@ const schemas = [organization, ...extraSchemas];
             tab.classList.toggle("exam-tabs__tab--active", active);
             tab.setAttribute("aria-current", active ? "page" : "false");
           });
-
-          document.querySelectorAll("[data-subnav]").forEach((el) => {
-            el.hidden = el.dataset.subnav !== exam;
-          });
-
-          document.querySelectorAll("[data-drawer-subnav]").forEach((el) => {
-            el.hidden = el.dataset.drawerSubnav !== exam;
-          });
         };
 
         let exam = examFromPath();

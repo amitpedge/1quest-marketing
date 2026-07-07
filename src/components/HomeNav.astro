@@ -133,7 +133,6 @@ function splitSubnav(links: { href: string; label: string }[]) {
             class="subnav"
             data-subnav={examId}
             aria-label={`${examId} sections`}
-            hidden={!agnostic && exam !== examId}
           >
             <div class="subnav__visible subnav__visible--mobile">
               {split.visibleMobile.map(({ href, label }) => (
@@ -188,7 +187,7 @@ function splitSubnav(links: { href: string; label: string }[]) {
         ];
         if (!overflow.length) return null;
         return (
-          <div class="masthead__drawer-section" data-drawer-subnav={examId} hidden={!agnostic && exam !== examId}>
+          <div class="masthead__drawer-section" data-drawer-subnav={examId}>
             <p class="masthead__drawer-k">{examId === "school" ? "School" : "UPSC"}</p>
             <ul class="masthead__drawer-list">
               {overflow.map(({ href, label }) => (
