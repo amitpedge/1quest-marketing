@@ -59,7 +59,7 @@ function splitSubnav(links: { href: string; label: string }[]) {
 
 <header class="masthead">
   <div class="masthead__shell">
-    <div class="masthead__row masthead__row--bar">
+    <div class="masthead__bar">
       <button
         type="button"
         class="masthead__menu-btn"
@@ -68,7 +68,7 @@ function splitSubnav(links: { href: string; label: string }[]) {
         aria-controls="masthead-drawer"
         data-menu-btn
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M4 7h16M4 12h16M4 17h16"
             stroke="currentColor"
@@ -87,19 +87,6 @@ function splitSubnav(links: { href: string; label: string }[]) {
         />
       </a>
 
-      <a class="masthead__user" href="/contact/" aria-label="Contact us">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle>
-          <path
-            d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"></path>
-        </svg>
-      </a>
-    </div>
-
-    <div class="masthead__track">
       <nav class="exam-tabs" aria-label="Choose exam">
         {
           exams.map(({ id, label, short, href, enabled }) =>
@@ -124,6 +111,30 @@ function splitSubnav(links: { href: string; label: string }[]) {
         }
       </nav>
 
+      <div class="masthead__utility">
+        <nav class="masthead__meta" aria-label="Company">
+          {
+            menuLinks.map(({ href, label }) => (
+              <a class="masthead__meta-link" href={href}>
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+        <a class="masthead__user" href="/contact/" aria-label="Contact us">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle>
+            <path
+              d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="masthead__subrow">
       {
         (["school", "upsc"] as ExamId[]).map((examId) => {
           const links = navByExam[examId];
@@ -143,22 +154,11 @@ function splitSubnav(links: { href: string; label: string }[]) {
                 ))}
               </div>
               <div class="subnav__visible subnav__visible--desktop">
-                <div class="subnav__exam-links">
-                  {split.visibleDesktop.map(({ href, label }) => (
-                    <a class="subnav__link" href={href}>
-                      {label}
-                    </a>
-                  ))}
-                </div>
-                <div class="subnav__meta-links">
-                  {
-                    menuLinks.map(({ href, label }) => (
-                      <a class="subnav__link subnav__link--meta" href={href}>
-                        {label}
-                      </a>
-                    ))
-                  }
-                </div>
+                {split.visibleDesktop.map(({ href, label }) => (
+                  <a class="subnav__link" href={href}>
+                    {label}
+                  </a>
+                ))}
               </div>
             </nav>
           );
