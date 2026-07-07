@@ -59,7 +59,7 @@ function splitSubnav(links: { href: string; label: string }[]) {
 
 <header class="masthead">
   <div class="masthead__shell">
-    <div class="masthead__row masthead__row--main">
+    <div class="masthead__row masthead__row--bar">
       <button
         type="button"
         class="masthead__menu-btn"
@@ -87,6 +87,19 @@ function splitSubnav(links: { href: string; label: string }[]) {
         />
       </a>
 
+      <a class="masthead__user" href="/contact/" aria-label="Contact us">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle>
+          <path
+            d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="masthead__track">
       <nav class="exam-tabs" aria-label="Choose exam">
         {
           exams.map(({ id, label, short, href, enabled }) =>
@@ -111,47 +124,47 @@ function splitSubnav(links: { href: string; label: string }[]) {
         }
       </nav>
 
-      <a class="masthead__user" href="/contact/" aria-label="Contact us">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"></circle>
-          <path
-            d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"></path>
-        </svg>
-      </a>
+      {
+        (["school", "upsc"] as ExamId[]).map((examId) => {
+          const links = navByExam[examId];
+          if (!links.length) return null;
+          const split = splitSubnav(links);
+          return (
+            <nav
+              class="subnav"
+              data-subnav={examId}
+              aria-label={`${examId} sections`}
+            >
+              <div class="subnav__visible subnav__visible--mobile">
+                {split.visibleMobile.map(({ href, label }) => (
+                  <a class="subnav__link" href={href}>
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <div class="subnav__visible subnav__visible--desktop">
+                <div class="subnav__exam-links">
+                  {split.visibleDesktop.map(({ href, label }) => (
+                    <a class="subnav__link" href={href}>
+                      {label}
+                    </a>
+                  ))}
+                </div>
+                <div class="subnav__meta-links">
+                  {
+                    menuLinks.map(({ href, label }) => (
+                      <a class="subnav__link subnav__link--meta" href={href}>
+                        {label}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </nav>
+          );
+        })
+      }
     </div>
-
-    {
-      (["school", "upsc"] as ExamId[]).map((examId) => {
-        const links = navByExam[examId];
-        if (!links.length) return null;
-        const split = splitSubnav(links);
-        return (
-          <nav
-            class="subnav"
-            data-subnav={examId}
-            aria-label={`${examId} sections`}
-          >
-            <div class="subnav__visible subnav__visible--mobile">
-              {split.visibleMobile.map(({ href, label }) => (
-                <a class="subnav__link" href={href}>
-                  {label}
-                </a>
-              ))}
-            </div>
-            <div class="subnav__visible subnav__visible--desktop">
-              {split.visibleDesktop.map(({ href, label }) => (
-                <a class="subnav__link" href={href}>
-                  {label}
-                </a>
-              ))}
-            </div>
-          </nav>
-        );
-      })
-    }
   </div>
 
   <div class="masthead__backdrop" data-menu-backdrop hidden></div>
@@ -187,8 +200,11 @@ function splitSubnav(links: { href: string; label: string }[]) {
         ];
         if (!overflow.length) return null;
         return (
-          <div class="masthead__drawer-section" data-drawer-subnav={examId}>
-            <p class="masthead__drawer-k">{examId === "school" ? "School" : "UPSC"}</p>
+          <div
+            class="masthead__drawer-section masthead__drawer-section--overflow"
+            data-drawer-subnav={examId}
+          >
+            <p class="masthead__drawer-k">More</p>
             <ul class="masthead__drawer-list">
               {overflow.map(({ href, label }) => (
                 <li>
@@ -201,7 +217,7 @@ function splitSubnav(links: { href: string; label: string }[]) {
       })
     }
 
-    <div class="masthead__drawer-section">
+    <div class="masthead__drawer-section masthead__drawer-section--pages">
       <p class="masthead__drawer-k">Pages</p>
       <ul class="masthead__drawer-list">
         {
