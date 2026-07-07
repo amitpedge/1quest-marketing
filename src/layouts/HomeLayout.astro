@@ -111,7 +111,8 @@ const schemas = [organization, ...extraSchemas];
           document.querySelectorAll("[data-exam-tab]").forEach((tab) => {
             const active = tab.dataset.examTab === exam;
             tab.classList.toggle("exam-tabs__tab--active", active);
-            tab.setAttribute("aria-current", active ? "page" : "false");
+            if (active) tab.setAttribute("aria-current", "page");
+            else tab.removeAttribute("aria-current");
           });
         };
 

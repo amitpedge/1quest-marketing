@@ -403,6 +403,12 @@ body.menu-open {
   }
   .subnav__visible--desktop {
     display: flex;
+    justify-content: center;
+  }
+  .home[data-exam="school"] .subnav[data-subnav="school"],
+  .home[data-exam="upsc"] .subnav[data-subnav="upsc"] {
+    display: block;
+    padding-inline: 2.5rem;
   }
   .exam-tabs__tab {
     padding: 0.42rem 0.85rem;
