@@ -43,6 +43,8 @@
   /* Rhythm */
   --shell: 70rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
+  --masthead-icon: 2.75rem;
+  --masthead-row: 3.5rem;
 
   /* Radii */
   --radius-btn: 0.65rem;
