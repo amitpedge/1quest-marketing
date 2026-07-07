@@ -1,40 +1,42 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import HomeLayout from "../layouts/HomeLayout.astro";
+import "../styles/content.css";
 
 const updated = new Intl.DateTimeFormat("en-IN", {
   dateStyle: "long",
 }).format(new Date("2026-07-05"));
 ---
 
-<Layout
-  title="Privacy — 1Quest Learn"
+<HomeLayout
+  title="Privacy — 1Quest"
   description="How 1Quest handles data on this marketing site."
 >
-  <section class="page-hero">
-    <p class="eyebrow">Legal</p>
-    <h1 class="page-title">Privacy</h1>
-    <p class="lede">A plain-language summary for visitors to this marketing site.</p>
-  </section>
+  <article class="inner">
+    <header class="inner__header wrap-read">
+      <p class="eyebrow">Legal</p>
+      <h1 class="inner__title">Privacy</h1>
+      <p class="inner__lead">A plain-language summary for visitors to this marketing site.</p>
+    </header>
 
-  <div class="prose">
-    <p><em>Last updated: {updated}</em></p>
+    <div class="wrap-read inner__body prose-lg">
+      <p class="inner__note"><em>Last updated: {updated}</em></p>
 
-    <h2>This site</h2>
-    <p>
-      Pages on 1Quest Learn are mostly static. We may use standard analytics (for example Google
-      Analytics or Tag Manager) to understand traffic and improve content. Those tools may set
-      cookies according to their own policies.
-    </p>
+      <h2>This site</h2>
+      <p>
+        Pages on 1quest.app are mostly static. We may use standard analytics (for example Google
+        Analytics or Tag Manager) to understand traffic and improve content. Those tools may set
+        cookies according to their own policies.
+      </p>
 
-    <h2>The 1Quest app</h2>
-    <p>
-      When you sign in to the full product, a separate privacy policy applies to account data,
-      study activity, and billing. This page covers the public marketing site only.
-    </p>
+      <h2>The 1Quest app</h2>
+      <p>
+        When you sign in to the full product, a separate privacy policy applies to account data,
+        study activity, and billing. This page covers the public marketing site only.
+      </p>
 
-    <h2>Contact</h2>
-    <p>
-      Privacy questions: <a href="mailto:hello@1quest.app">hello@1quest.app</a>
-    </p>
-  </div>
-</Layout>
+      <h2>Contact</h2>
+      <p>Privacy questions:</p>
+      <a class="inner__contact" href="mailto:hello@1quest.app">hello@1quest.app</a>
+    </div>
+  </article>
+</HomeLayout>

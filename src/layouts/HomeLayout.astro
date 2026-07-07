@@ -81,8 +81,9 @@ const schemas = [organization, ...extraSchemas];
         const root = document.querySelector(".home");
         if (!root) return;
         const buttons = Array.from(document.querySelectorAll("[data-mode-btn]"));
+        const valid = new Set(["school", "upsc"]);
         const apply = (mode) => {
-          if (mode !== "school" && mode !== "upsc") return;
+          if (!valid.has(mode)) mode = "school";
           root.setAttribute("data-mode", mode);
           buttons.forEach((b) =>
             b.setAttribute("aria-pressed", String(b.dataset.modeBtn === mode))
@@ -98,7 +99,8 @@ const schemas = [organization, ...extraSchemas];
         try {
           saved = localStorage.getItem("1q-mode");
         } catch (e) {}
-        apply(saved || root.getAttribute("data-mode") || "school");
+        const fromQuery = new URLSearchParams(location.search).get("exam");
+        apply(fromQuery || saved || root.getAttribute("data-mode") || "school");
       })();
     </script>
   </body>

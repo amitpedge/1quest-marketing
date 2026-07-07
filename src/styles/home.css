@@ -194,19 +194,28 @@ body {
 }
 .nav__links {
   display: none;
-  gap: 2rem;
+  align-items: center;
+  min-width: 0;
 }
-.nav__links a {
+.nav-set {
+  display: none;
+  flex-wrap: wrap;
+  gap: 1.5rem 2rem;
+  align-items: center;
+}
+.home[data-mode="school"] .nav-set.mode-school,
+.home[data-mode="upsc"] .nav-set.mode-upsc {
+  display: flex;
+}
+.nav-set a {
   color: var(--ink-muted);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
+  white-space: nowrap;
 }
-.nav__links a:hover {
+.nav-set a:hover {
   color: var(--ink);
-}
-.nav__link--desktop {
-  display: none;
 }
 .nav__right {
   display: flex;
@@ -224,34 +233,117 @@ body {
   color: var(--accent);
 }
 
-/* Signature: the School | UPSC switch */
-.switch {
+/* Exam picker — School · JEE · NEET · UPSC */
+.exam-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.exam-bar__k {
+  display: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.exam-bar__options {
   display: inline-flex;
-  padding: 0.25rem;
+  gap: 0.2rem;
+  padding: 0.2rem;
   border: 1px solid var(--line-strong);
   background: var(--paper-card);
   border-radius: 0.6rem;
+  overflow-x: auto;
+  max-width: min(100%, 18rem);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
-.switch button {
+.exam-bar__options::-webkit-scrollbar {
+  display: none;
+}
+.exam-bar__opt {
   appearance: none;
   border: 0;
   background: transparent;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.42rem 0.65rem;
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--ink-muted);
   border-radius: 0.45rem;
+  white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.home[data-mode="school"] .switch [data-mode-btn="school"] {
-  background: var(--green);
+.exam-bar__short {
+  display: none;
+}
+.home[data-mode="school"] .exam-bar [data-mode-btn="school"],
+.home[data-mode="upsc"] .exam-bar [data-mode-btn="upsc"] {
+  background: var(--accent);
   color: #fff;
 }
-.home[data-mode="upsc"] .switch [data-mode-btn="upsc"] {
-  background: var(--red-solid);
-  color: #fff;
+.exam-bar__opt--soon {
+  cursor: not-allowed;
+  opacity: 0.55;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.exam-bar__opt--soon:disabled {
+  pointer-events: none;
+}
+.exam-bar__badge {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+@media (max-width: 520px) {
+  .exam-bar__opt--soon .exam-bar__badge {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .exam-bar__long {
+    display: none;
+  }
+  .exam-bar__short {
+    display: inline;
+  }
+  .exam-bar__opt {
+    padding: 0.42rem 0.55rem;
+  }
+}
+@media (min-width: 900px) {
+  .exam-bar__k {
+    display: inline;
+  }
+  .exam-bar__options {
+    max-width: none;
+  }
+  .exam-bar__opt {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 767px) {
+  .nav__shell {
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+  }
+  .exam-bar {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .exam-bar__options {
+    max-width: none;
+    flex: 1;
+  }
 }
 
 /* ---------- HERO ---------- */
@@ -613,6 +705,14 @@ body {
 .foot__col a:hover {
   color: var(--ink);
 }
+.foot__soon {
+  color: var(--ink-faint);
+  font-size: 0.92rem;
+}
+.foot__soon-k {
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
 .foot__copy {
   margin: 0;
   padding-top: 1.5rem;
@@ -630,9 +730,8 @@ body {
 @media (min-width: 920px) {
   .nav__links {
     display: flex;
-  }
-  .nav__link--desktop {
-    display: inline;
+    flex: 1;
+    justify-content: center;
   }
 }
 

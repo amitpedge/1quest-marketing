@@ -2,10 +2,35 @@
 const year = new Date().getFullYear();
 
 const columns = [
-  { title: "Product", links: ["How it works", "For schools", "For UPSC", "The agents"] },
-  { title: "Company", links: ["About", "Careers", "Contact"] },
-  { title: "Resources", links: ["Help centre", "Blog", "Status", "FAQ"] },
-  { title: "Legal", links: ["Terms", "Privacy", "Refunds"] },
+  {
+    title: "Product",
+    links: [
+      { label: "How it works", href: "/#how" },
+      { label: "For parents", href: "/#parents" },
+      { label: "School guides", href: "/school/" },
+      { label: "The agents", href: "/#agents" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about/" },
+      { label: "Contact", href: "/contact/" },
+    ],
+  },
+  {
+    title: "Exams",
+    links: [
+      { label: "School", href: "/?exam=school" },
+      { label: "UPSC", href: "/?exam=upsc" },
+      { label: "JEE", soon: true },
+      { label: "NEET", soon: true },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [{ label: "Privacy", href: "/privacy/" }],
+  },
 ];
 ---
 
@@ -15,7 +40,7 @@ const columns = [
       <a class="brand" href="/" aria-label="1Quest home">
         <img class="brand__img" src="/1quest-logo.svg" alt="1Quest" width="2165" height="1237" />
       </a>
-      <p class="foot__tag">AI study agents for school and UPSC.</p>
+      <p class="foot__tag">AI study agents for school and UPSC. JEE &amp; NEET coming soon.</p>
     </div>
 
     <div class="foot__grid">
@@ -26,7 +51,13 @@ const columns = [
             <ul>
               {col.links.map((link) => (
                 <li>
-                  <a href="/contact/">{link}</a>
+                  {"soon" in link && link.soon ? (
+                    <span class="foot__soon">
+                      {link.label} <span class="foot__soon-k">· coming soon</span>
+                    </span>
+                  ) : (
+                    <a href={link.href}>{link.label}</a>
+                  )}
                 </li>
               ))}
             </ul>

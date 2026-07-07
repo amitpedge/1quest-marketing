@@ -1,27 +1,32 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import HomeLayout from "../layouts/HomeLayout.astro";
+import "../styles/content.css";
 ---
 
-<Layout
-  title="Contact — 1Quest Learn"
+<HomeLayout
+  title="Contact — 1Quest"
   description="Reach the 1Quest team with questions, feedback, or partnership ideas."
 >
-  <section class="page-hero">
-    <p class="eyebrow">Contact</p>
-    <h1 class="page-title">Get in <span class="grad">touch</span></h1>
-    <p class="lede">Questions, feedback, or ideas — we'd like to hear from you.</p>
-  </section>
+  <article class="inner">
+    <header class="inner__header wrap-read">
+      <p class="eyebrow">Contact</p>
+      <h1 class="inner__title">Get in <em>touch</em></h1>
+      <p class="inner__lead">Questions, feedback, or ideas — we'd like to hear from you.</p>
+    </header>
 
-  <div class="prose">
-    <p>
-      For product support and account issues, use the in-app help once you're signed in to 1Quest.
-      For everything else on this marketing site, email us:
-    </p>
-    <p>
-      <a href="mailto:hello@1quest.app">hello@1quest.app</a>
-    </p>
-    <p>
-      We read every message. Response times vary, but we typically reply within a few business days.
-    </p>
-  </div>
-</Layout>
+    <div class="wrap-read inner__body prose-lg">
+      <h2>Product support</h2>
+      <p>
+        For account issues or in-app help, use the help centre once you're signed in to 1Quest.
+        That gets you to the right team fastest.
+      </p>
+
+      <h2>Everything else</h2>
+      <p>For this marketing site — partnerships, press, or general questions — email us:</p>
+      <a class="inner__contact" href="mailto:hello@1quest.app">hello@1quest.app</a>
+      <p class="inner__note">
+        <em>We read every message. Response times vary, but we typically reply within a few business days.</em>
+      </p>
+    </div>
+  </article>
+</HomeLayout>
