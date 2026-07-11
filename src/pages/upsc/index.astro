@@ -1,6 +1,53 @@
 ---
 import HomeLayout from "../../layouts/HomeLayout.astro";
 
+const productApp = "https://upsc.1quest.app";
+
+const products = [
+  {
+    k: "Editorial",
+    name: "Editorial X-Ray",
+    body: "Complex editorials explained step by step — Pre-Read, Teach Me in English or Hinglish, and GS paper mapping.",
+    href: `${productApp}/editorial`,
+    cta: "Try Editorial X-Ray →",
+  },
+  {
+    k: "Mains",
+    name: "Answer Co-Write",
+    body: "Build your Mains blueprint before you write — topic by topic, argument by argument.",
+    href: `${productApp}/cowrite`,
+    cta: "Try Answer Co-Write →",
+  },
+  {
+    k: "Concepts",
+    name: "1Q Concepts",
+    body: "Unblock complex topics with concept notes tuned for Prelims and Mains — from one query.",
+    href: `${productApp}/concepts`,
+    cta: "Try 1Q Concepts →",
+  },
+  {
+    k: "Evaluation",
+    name: "Answer Evaluation",
+    body: "AI that reads your handwriting, checks facts, and grades against UPSC marking criteria.",
+    href: `${productApp}/evaluation`,
+    cta: "Try Answer Evaluation →",
+  },
+  {
+    k: "Notes",
+    name: "Notes Vault",
+    body: "Your topic-wise knowledge base — notes, breakdowns, and elaborations retrievable in seconds.",
+    href: `${productApp}/vault`,
+    cta: "Open Notes Vault →",
+  },
+  {
+    k: "Current affairs",
+    name: "Budget & Economic Survey",
+    body: "Union Budget 2026-27 and Economic Survey chapters decoded for Prelims and Mains.",
+    href: `${productApp}/budget-2026-27`,
+    cta: "Read Budget analysis →",
+  },
+];
+
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -32,8 +79,8 @@ const websiteSchema = {
         </div>
 
         <p class="agents">
-          <span class="agents__label">Your agents</span>
-          Planner · Prelims Coach · Answer Reviewer
+          <span class="agents__label">Live on the web app</span>
+          Editorial X-Ray · Co-Write · Concepts · Evaluation
         </p>
       </div>
 
@@ -83,25 +130,34 @@ const websiteSchema = {
         <h2 class="display-sm">A disciplined mentor for the long haul.</h2>
         <p class="lead center">
           1Quest plans your prep, drills prelims daily, and reviews mains answers with the
-          honesty a rank demands.
+          honesty a rank demands. Try the live tools below.
         </p>
       </div>
 
       <div class="agentgrid agentgrid--upsc" id="agents">
-        <article class="agent">
-          <span class="agent__k">Agent</span>
-          <h3 class="agent__name">Planner</h3>
-          <p>A syllabus plan you can actually trust — and adjust as you go.</p>
-        </article>
-        <article class="agent">
-          <span class="agent__k">Agent</span>
-          <h3 class="agent__name">Prelims Coach</h3>
-          <p>Daily, targeted drills that find and fix your weak spots.</p>
-        </article>
-        <article class="agent">
-          <span class="agent__k">Agent</span>
-          <h3 class="agent__name">Answer Reviewer</h3>
-          <p>Honest mains feedback on structure, content, and word discipline.</p>
+        {
+          products.map((product) => (
+            <article class="agent">
+              <span class="agent__k">{product.k}</span>
+              <h3 class="agent__name">{product.name}</h3>
+              <p>{product.body}</p>
+              <a class="agent__link" href={product.href}>
+                {product.cta}
+              </a>
+            </article>
+          ))
+        }
+
+        <article class="agent agent--wide agent--wide-upsc">
+          <span class="agent__k">All tools</span>
+          <h3 class="agent__name">Open the full UPSC web app</h3>
+          <p>
+            Editorial analysis, answer co-writing, concept notes, evaluation, vault, and
+            Budget &amp; Economic Survey guides — all live at upsc.1quest.app.
+          </p>
+          <a class="agent__link" href={productApp}>
+            Go to upsc.1quest.app →
+          </a>
         </article>
       </div>
     </div>

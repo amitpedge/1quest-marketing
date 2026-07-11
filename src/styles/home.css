@@ -1092,10 +1092,25 @@ body.menu-open {
   color: var(--ink-muted);
   font-size: 0.95rem;
 }
+.agent__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+.agentgrid--upsc .agent__link:hover {
+  color: var(--red);
+}
 .agent--wide {
   grid-column: 1 / -1;
   background: var(--sage-panel);
   border-top-color: var(--ink);
+}
+.agent--wide-upsc {
+  background: color-mix(in srgb, var(--red) 6%, var(--paper-card));
+  border-top-color: var(--red);
 }
 
 /* ---------- PARENT TRUST (anti-answer-machine) ---------- */
