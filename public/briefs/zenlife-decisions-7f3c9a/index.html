@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Zen Life — Product decisions</title>
+    <style>
+      :root {
+        --ink: #18231f;
+        --muted: #5d6964;
+        --line: #dbe3de;
+        --paper: #f7f8f6;
+        --card: #fff;
+        --accent: #176b50;
+        --accent-soft: #e7f3ed;
+        --warn: #8d5c06;
+        --warn-soft: #fff5dc;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; }
+      .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+      header {
+        padding: 56px 0 40px;
+        background: #123b2e;
+        color: white;
+      }
+      .eyebrow {
+        margin: 0 0 8px;
+        color: #b6dfcb;
+        font-size: 12px;
+        font-weight: 750;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 720px; margin-bottom: 12px; font-size: clamp(32px, 6vw, 56px); line-height: 1.03; letter-spacing: -.035em; }
+      .lede { max-width: 760px; margin: 0; color: #d8e8e0; font-size: 18px; }
+      .notice {
+        margin-top: 28px;
+        padding: 14px 16px;
+        max-width: 800px;
+        border: 1px solid rgba(255,255,255,.25);
+        border-radius: 10px;
+        background: rgba(255,255,255,.08);
+        color: #f2f8f5;
+        font-size: 14px;
+      }
+      .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 38px; padding: 34px 0 72px; }
+      nav { position: sticky; top: 16px; align-self: start; }
+      nav p { margin-bottom: 10px; color: var(--muted); font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+      nav a { display: block; padding: 7px 0; color: var(--muted); font-size: 14px; text-decoration: none; }
+      nav a:hover { color: var(--accent); }
+      .legend, .part-intro, .parked { padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+      .legend { margin-bottom: 28px; }
+      .legend h2, .part-intro h2, .parked h2 { margin-bottom: 8px; font-size: 18px; }
+      .legend p, .part-intro p, .parked p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+      .key { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 29px;
+        padding: 4px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: white;
+        color: #35413c;
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .chip.recommended { border-color: #efcc78; background: var(--warn-soft); color: var(--warn); }
+      section { scroll-margin-top: 20px; }
+      .part { margin-top: 42px; }
+      .part > h2 { margin-bottom: 8px; font-size: clamp(26px, 4vw, 34px); letter-spacing: -.025em; }
+      .group { margin-top: 30px; }
+      .group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+      .group-head h3 { margin: 0; font-size: 20px; }
+      .count { color: var(--muted); font-size: 13px; }
+      .cards { display: grid; gap: 12px; margin-top: 14px; }
+      .card { padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+      .card-top { display: flex; gap: 12px; align-items: flex-start; }
+      .number { flex: 0 0 auto; min-width: 34px; padding: 3px 7px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 800; text-align: center; }
+      .question { margin: 0; font-size: 16px; font-weight: 750; line-height: 1.35; }
+      .answer-kind { margin: 11px 0 7px 46px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+      .options { display: flex; flex-wrap: wrap; gap: 7px; margin-left: 46px; }
+      .why { margin: 14px 0 0 46px; color: var(--muted); font-size: 14px; }
+      .why strong { color: var(--ink); }
+      .decision { margin: 14px 0 0 46px; padding-top: 12px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 13px; }
+      .decision-line { display: inline-block; min-width: min(310px, 100%); margin-left: 8px; border-bottom: 1px solid #91a49a; vertical-align: middle; }
+      .vendor-table { width: 100%; margin-top: 14px; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+      th, td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      th { color: var(--muted); background: #f0f4f1; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+      td { font-size: 14px; }
+      tr:last-child td { border-bottom: 0; }
+      .pick { min-width: 120px; border-bottom: 1px solid #91a49a; color: transparent; }
+      .parked { margin-top: 32px; border-left: 4px solid var(--warn); }
+      .parked ul { margin: 14px 0 0; padding-left: 20px; color: var(--muted); }
+      .parked li { margin: 7px 0; }
+      @media (max-width: 850px) {
+        .layout { display: block; }
+        nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; margin-bottom: 30px; }
+        nav p { grid-column: 1 / -1; }
+      }
+      @media (max-width: 620px) {
+        header { padding: 40px 0 32px; }
+        .shell { width: min(100% - 24px, 1180px); }
+        .card { padding: 16px; }
+        .answer-kind, .options, .why, .decision { margin-left: 0; }
+        .answer-kind { margin-top: 12px; }
+        th:nth-child(2), td:nth-child(2) { display: none; }
+      }
+      @media print {
+        body { background: white; font-size: 11px; }
+        header { padding: 18px 0; background: white; color: black; border-bottom: 2px solid black; }
+        .eyebrow, .lede, .notice { color: #333; }
+        .layout { display: block; padding: 18px 0; }
+        nav { display: none; }
+        .card, .legend, .part-intro, .parked { break-inside: avoid; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell">
+        <p class="eyebrow">Zen Life · decision workbook · v2</p>
+        <h1>Product decisions for the people side of the app.</h1>
+        <p class="lede">A structured, non-interactive review page for the decisions that shape onboarding, privacy, communication, payments, operations, partners, and vendors.</p>
+        <p class="notice"><strong>How to use this page:</strong> review each decision, then record the outcome in the source decision document. “Later” is a valid answer wherever offered. Items marked <strong>Recommended</strong> signal a safety, privacy, or legal baseline—not a final decision made for you.</p>
+      </div>
+    </header>
+    <main class="shell layout">
+      <nav aria-label="On this page">
+        <p>Jump to a section</p>
+        <a href="#journey">Part 1 · Patient journey</a>
+        <a href="#account">Account &amp; security</a>
+        <a href="#reports">Reports &amp; health profile</a>
+        <a href="#privacy">Privacy, consent &amp; support</a>
+        <a href="#other-users">Part 2 · Other users</a>
+        <a href="#parked">Part 3 · Parked</a>
+        <a href="#vendors">Part 4 · Vendors</a>
+      </nav>
+      <div>
+        <section class="legend">
+          <h2>Reading the choices</h2>
+          <p>Choice chips make the available answers visible. They are deliberately not clickable or stored by this page.</p>
+          <div class="key">
+            <span class="chip">Pick one</span>
+            <span class="chip">Pick any</span>
+            <span class="chip">Yes / No / Later</span>
+            <span class="chip recommended">Recommended</span>
+          </div>
+        </section>
+        <section class="part" id="journey">
+          <h2>Part 1 — The patient’s journey</h2>
+          <div class="part-intro"><p>Decisions faced by a person using Zen Life: from first visit through reports, support, consent, and deletion.</p></div>
+          <div id="patient-groups"></div>
+        </section>
+        <section class="part" id="other-users">
+          <h2>Part 2 — The other three user types</h2>
+          <div class="part-intro"><p>Decisions for the internal operator, clinician-testers, and lab partners who work around the patient experience.</p></div>
+          <div id="other-groups"></div>
+        </section>
+        <section class="parked" id="parked">
+          <h2>Part 3 — Deliberately parked</h2>
+          <p>These are real future decisions, but they are not blocking the core build and should receive focused treatment later.</p>
+          <ul>
+            <li><strong>Graceful degradation / AI reliability:</strong> how downtime, slowness, and low confidence are detected and surfaced.</li>
+            <li><strong>SEO &amp; discoverability:</strong> marketing pages, search indexing, and app-store presence.</li>
+            <li><strong>Referral &amp; growth:</strong> invitations, referrals, and virality mechanics.</li>
+            <li><strong>Financial operations:</strong> reconciliation, payouts, chargebacks, and tax filing.</li>
+            <li><strong>Advanced analytics:</strong> experiments and cohort analysis once there is meaningful traffic.</li>
+          </ul>
+        </section>
+        <section class="part" id="vendors">
+          <h2>Part 4 — External services &amp; vendors</h2>
+          <div class="part-intro"><p>Vendor choices follow the product decisions above. The last column is intentionally left blank for the selection.</p></div>
+          <div id="vendor-groups"></div>
+        </section>
+      </div>
+    </main>
+    <script>
+      const patientGroups = [
+        ["A. Getting started (first-run onboarding)", [
+          ["1", "Guide new users through a first-run setup?", "Yes / No / Later", "Sets the tone and gets people to first value fast."],
+          ["2", "When do we capture health basics?", "At signup · Later, in-app · Only when needed", "Upfront is complete; later is lower-friction."],
+          ["3", "When do we ask for permissions (notifications, uploads)?", "Upfront · When first needed", "Asking in context earns more yeses."],
+          ["4", "Show a sample/demo report first?", "Yes / No / Later", "Helps people understand the product before their own data arrives."]
+        ]],
+        ["B. Creating an account", [
+          ["5", "Which ways can someone sign up?", "Email · Google/Apple · WhatsApp · Phone + OTP · Magic link", "More options lower friction, but each adds maintenance."],
+          ["6", "Password, or no password?", "Password · No password (code/link) · Both", "Passwordless is simpler; passwords are familiar."],
+          ["7", "Verify email/phone before entry?", "Yes / No / Later", "Stops fake or mistyped contacts."],
+          ["8", "Stop bots / fake signups?", "Yes · No · Later", "Protects against spam and abuse.", "Yes"]
+        ]],
+        ["C. Signing in & staying secure", [
+          ["9", "Quick sign-in, or an extra security step?", "Quick · 2-step all · 2-step staff only", "Security versus convenience."],
+          ["10", "How long should people stay logged in?", "Short · Long · In-between", "Convenience versus safety on shared devices."],
+          ["11", "Allow one account on several devices at once?", "Yes / No / Later", "Controls multi-device login."],
+          ["12", "Should their data/history sync across devices?", "Yes / No / Later", "Multi-device data is separate from multi-device login."],
+          ["13", "Save work-in-progress so people can resume later?", "Yes / No / Later", "Session persistence is a real UX choice."],
+          ["14", "If locked out, how do they get back in?", "Email reset · Phone OTP · Support", "People will get locked out."]
+        ]],
+        ["D. Hearing from us (messages)", [
+          ["15", "Which channels do we message on?", "WhatsApp · SMS · Email · In-app · Push", "Where users are; every channel has cost."],
+          ["16", "Which moments get a message?", "Signup · Welcome · Sign-in · Purchase · Renewal · Failed payment · Report ready · Win-back · Goodbye", "Each moment can have a distinct message."],
+          ["17", "Let users choose which messages they get?", "Yes · No · Later", "Respect, legal opt-out, and relevance.", "Yes"],
+          ["18", "Avoid messaging at odd hours?", "Yes / No / Later", "Do not wake or annoy people."]
+        ]],
+        ["E. Notifications & reminders", [
+          ["19", "Provide an in-app notification centre?", "Yes / No / Later", "Creates one place for everything that happened."],
+          ["20", "Let users set reminders?", "Yes / No / Later", "Supports re-tests, follow-up, medication, and appointments."],
+          ["21", "Which reminder types?", "Re-test · Follow-up · Medication · Appointment", "Defines the reminders feature."],
+          ["22", "Real-time alerts or a daily digest?", "Real-time · Digest · User chooses", "Noise versus immediacy."]
+        ]],
+        ["F. Paying", [
+          ["23", "How do users pay?", "One-time · Subscription · Pay-as-you-go credits · Mix", "Defines the core money model."],
+          ["24", "Does usage count toward what we charge?", "Yes / No / Later", "Sets the metering-to-pricing link."],
+          ["25", "Offer a free way to try before paying?", "Free tier · Free trial · None", "Lowers the barrier but affects revenue."],
+          ["26", "How many plans / tiers?", "One · Two · Three+ · Later", "Simplicity versus choice."],
+          ["27", "Discounts or coupons?", "Yes / No / Later", "Supports promotions and referrals."],
+          ["28", "Auto-renew subscriptions (UPI / card)?", "Yes / No / Later", "Requires recurring-payment mandate setup in India."],
+          ["29", "Can users cancel / refund themselves?", "Yes / No / Later", "Trust versus support load."],
+          ["30", "Issue GST invoices?", "Yes / No / Later", "Tax compliance in India."]
+        ]],
+        ["G. What they can send in — and reports", [
+          ["31", "What can a user send in?", "Text · PDF · Photo · Voice · Video · Forwarded email · WhatsApp forward", "Defines the product’s input surface."],
+          ["32", "Which of these are available at launch (v1)?", "Pick any subset · Later", "Start small and add later."],
+          ["33", "Cap file sizes / types?", "Yes / No / Later", "Controls cost and abuse."],
+          ["34", "Scan uploads for viruses?", "Yes · No · Later", "Upload safety.", "Yes"],
+          ["35", "Can users act on reports already in the system, not just new uploads?", "Yes / No / Later", "Distinguishes internal reports from freshly-uploaded external ones."],
+          ["36", "Can a user re-run the AI on an existing report?", "Yes / No / Later", "Enables reuse of internal reports."],
+          ["37", "Show a report’s source (user upload versus lab-delivered)?", "Yes / No / Later", "Builds provenance and trust."]
+        ]],
+        ["H. Profile — and family / dependents", [
+          ["38", "Can users edit their own profile?", "Fully · Some fields · Support-only", "Self-service versus controlled change."],
+          ["39", "Can one account hold several people (family / dependents)?", "Yes / No / Later", "A major household-use decision."],
+          ["40", "Who can a primary user manage?", "Children · Elderly parents · Spouse/other adults", "Defines dependent-profile scope."],
+          ["41", "Separate consent for adult dependents?", "Yes · No · Later", "Adults must consent for their own data.", "Yes"],
+          ["42", "Can users download a copy of their data?", "Yes · No · Later", "Often legally required and builds trust.", "Yes"]
+        ]],
+        ["H2. The fuller picture — health-profile data", [
+          ["a1", "What counts as user data here?", "Demographics · Static medical history · Documents/reports · Chat sessions · Derived health profile · Usage data", "Sets the real scope: it is more than files."],
+          ["a2", "Capture basic demographics (age, sex, etc.)?", "Yes / No / Later", "Needed to interpret many results correctly."],
+          ["a3", "Maintain a static medical history?", "Yes / No / Later", "Adds context that does not come from a single report."],
+          ["a4", "How is medical history collected?", "Onboarding questionnaire · Editable anytime · Inferred & confirmed later", "Upfront effort versus ongoing accuracy."],
+          ["a5", "Can the user edit their medical history themselves?", "Yes / No / Later", "Keeps it current."],
+          ["a6", "Should AI extract facts from chat into the profile?", "Yes / No / Later", "Turns chat into a data source, not just a transcript."],
+          ["a7", "Should AI extract facts from documents into the profile?", "Yes / No / Later", "Lets documents feed the profile, not just be stored."],
+          ["a8", "For auto-added facts, confirm first or save silently?", "Confirm first · Save silently · Later", "Silent inference can be wrong or unsettling."],
+          ["a9", "Keep raw chat transcripts, extracted facts only, or both?", "Keep raw · Keep extracted facts only · Both", "Balances storage, privacy, and later usefulness."],
+          ["a10", "Show medical history back as a visible profile page?", "Yes / No / Later", "Transparency around what the product knows."],
+          ["a11", "Does medical history automatically influence future AI explanations?", "Yes / No / Later", "Powerful, but must be explicit."],
+          ["a12", "Separate consent to store/derive a health profile beyond documents?", "Yes · No", "A distinct and more sensitive data category.", "Yes"],
+          ["a13", "Keep version history of the medical profile?", "Yes / No / Later", "Supports a timeline of diagnoses and resolved conditions."]
+        ]],
+        ["I. Leaving & deleting data", [
+          ["43", "Can users delete their own account and data?", "Yes / No / Later", "A user right, with safeguards."],
+          ["44", "Instant delete or an undo window?", "Instant · Grace period (7–30 days) · Later", "Prevents accidental loss."],
+          ["45", "On deletion, what happens to data?", "Erase all · Keep anonymised · Keep only legal/audit", "Compliance versus clean erasure."],
+          ["46", "How do under-18s sign up?", "Not allowed · Guardian consent · Later", "Legal and safety requirement."]
+        ]],
+        ["J. What we keep, and for how long", [
+          ["47", "Roughly what do we store?", "Profile · Payments · Uploads & reports · Results · Usage · Consent", "Defines data responsibility."],
+          ["48", "How long do we keep health data?", "While active · Fixed period · Until user deletes · Later", "Retention and compliance."],
+          ["49", "Keep health data within India?", "Yes / No / Later", "Data-residency compliance."],
+          ["50", "Keep money data and health data fully separate?", "Yes · No", "Reduces risk and compliance scope.", "Yes"]
+        ]],
+        ["K. Consent & legal approvals", [
+          ["51", "Capture explicit, versioned consent to handle health data?", "Yes · No", "Foundational for a health app.", "Yes"],
+          ["52", "Ask users to re-consent when terms change?", "Yes · No · Later", "Keeps consent valid over time.", "Yes"],
+          ["53", "Separate consent to share with labs / doctors?", "Yes / No / Later", "Sharing is a distinct permission."],
+          ["54", "Separate consent for de-identified product-improvement data?", "Yes / No / Later", "Ethical and legal clarity for future ML work."],
+          ["55", "Show clear Terms, Privacy, and Consent screens?", "Yes · No", "Legal requirement.", "Yes"]
+        ]],
+        ["L. Getting help (support)", [
+          ["56", "Which support channels?", "In-app chat · WhatsApp · Email · Help centre · Phone/callback", "Where users get unstuck."],
+          ["57", "People, self-serve, or both?", "People · Self-serve · Both", "Cost versus responsiveness."],
+          ["58", "Can a user always reach a human?", "Yes · No · Later", "Critical in a health app.", "Yes"],
+          ["59", "Route a hidden medical worry specially instead of answering normally?", "Yes · No", "The key health-app safety rule.", "Yes"],
+          ["60", "Support hours?", "24/7 · Business hours · Later", "Health worries do not keep hours."]
+        ]],
+        ["M. Language & accessibility", [
+          ["61", "Which interface languages?", "English · Hindi · Other regional", "Determines who can use the product at all."],
+          ["62", "Which interaction languages?", "English · Hindi · Other", "Comfort and trust in AI interaction."],
+          ["63", "Auto-match interaction language to user choice?", "Yes / No / Later", "Makes multilingual experience seamless."],
+          ["64", "Accessibility basics: font scaling and screen-reader support?", "Yes / No / Later", "Reach and inclusion."],
+          ["65", "Let users pick units (mg/dL versus mmol/L)?", "Yes / No / Later", "Supports correct, familiar readings."]
+        ]]
+      ];
+      const otherGroups = [
+        ["N. Admin / operator portal", [
+          ["66", "What should admins be alerted on?", "Signup spikes · Payment failures · AI errors/slowness · Abuse/fraud · Downtime · Support SLA breaches", "Defines the operator’s radar."],
+          ["67", "How detailed an audit trail?", "Key actions · Everything · Later", "Compliance and debugging."],
+          ["68", "Can admins look up and manage users?", "Yes / No", "Day-to-day operations."],
+          ["69", "Can support view a user’s data (scoped and logged)?", "Yes / No / Later", "Helping users versus privacy.", "Scoped"],
+          ["70", "Impersonate a user to troubleshoot (audited)?", "Yes / No / Later", "Powerful but sensitive."],
+          ["71", "Manage plans, pricing, and coupons from a console?", "Yes / No / Later", "Change offers without a code release."],
+          ["72", "Manage message templates and content?", "Yes / No / Later", "Marketing and operations autonomy."],
+          ["73", "Broadcast announcements to users?", "Yes / No / Later", "For outages, launches, and notices."],
+          ["74", "Issue refunds / credits?", "Yes / No / Later", "Support resolution."],
+          ["75", "Turn features on/off with flags?", "Yes / No / Later", "Safe rollout and rollback."],
+          ["76", "Dashboards for usage, revenue, and engagement?", "Yes / No / Later", "Running the business."]
+        ]],
+        ["O. Clinician-tester console", [
+          ["77", "A review queue of AI outputs to grade?", "Yes / No", "Core of the trust loop."],
+          ["78", "Grade outputs against a rubric?", "Yes / No", "Structured, comparable feedback."],
+          ["79", "Author / edit guardrail rules?", "Yes / No / Later", "Clinicians set hard limits."],
+          ["80", "Annotate and flag failures?", "Yes / No", "Failures become new test cases."],
+          ["81", "Show each clinician their impact (accuracy trend)?", "Yes / No / Later", "Motivation and accountability."],
+          ["82", "What data can a clinician-tester see?", "De-identified only · Full case · Later", "Privacy versus review quality."]
+        ]],
+        ["P. Lab-partner portal", [
+          ["83", "How do labs send reports in?", "Manual upload · Bulk · API/feed · System integration", "Their effort to participate."],
+          ["84", "How are reports linked to a patient?", "Phone · Email · Patient-initiated", "The linkage and consent chain."],
+          ["85", "Co-branded or white-label patient view?", "Co-branded · Full white-label · Neither", "How much lab branding appears."],
+          ["86", "Partner dashboard: reports sent, patients reached, engagement?", "Yes / No / Later", "Proves value to labs."],
+          ["87", "Commercial model with labs?", "Revenue share · Referral fee · SaaS fee · Later", "How the partnership pays."],
+          ["88", "Multiple staff logins per partner organisation?", "Yes / No", "Labs are organisations, not individuals."],
+          ["89", "Dedicated partner support / SLA?", "Yes / No / Later", "B2B expectations."]
+        ]]
+      ];
+      const vendorGroups = [
+        ["Communications & payments", [
+          ["Payment gateway", "Payments, subscriptions, UPI AutoPay, GST invoices", "Razorpay · Cashfree · PayU · Stripe"],
+          ["SMS vendor", "OTP and transactional SMS", "MSG91 · Gupshup · Kaleyra · Twilio"],
+          ["WhatsApp vendor (BSP)", "WhatsApp messaging and approved templates", "Gupshup · Interakt · WATI · MSG91 · Twilio"],
+          ["Email vendor", "Transactional and marketing email", "AWS SES · SendGrid · Postmark · Resend · Loops"],
+          ["Push notifications", "Mobile / web push", "Firebase FCM · APNs · OneSignal"]
+        ]],
+        ["Identity, cloud & storage", [
+          ["Auth provider", "Sign-up/in, sessions, roles", "Clerk · Auth0 · Supabase Auth · Firebase Auth"],
+          ["Cloud hosting", "Run the app and services", "AWS · GCP · Azure"],
+          ["Managed database", "Operational and app data", "Postgres: RDS · Supabase · Neon"],
+          ["Object / file storage", "Uploads, reports, PHI files", "AWS S3 · Google GCS · Cloudflare R2"],
+          ["CDN / edge", "Fast delivery and protection", "Cloudflare · CloudFront"],
+          ["Cache & job queue", "Sessions, background jobs, reminders", "Redis · AWS SQS"]
+        ]],
+        ["AI & document processing", [
+          ["LLM API", "Reasoning engine", "Anthropic · OpenAI · Google Gemini"],
+          ["Speech-to-text", "Transcribe voice notes", "OpenAI Whisper · Deepgram · Google STT"],
+          ["OCR", "Read scanned reports / images", "Google Vision · AWS Textract"],
+          ["Virus / malware scanning", "Safe uploads", "ClamAV · Cloud AV"],
+          ["Imaging / vision models (later)", "Read scans by modality", "Domain-specific · Cloud"],
+          ["Vector database (if retrieval is used)", "Knowledge retrieval", "pgvector · Pinecone · Weaviate"]
+        ]],
+        ["Support, analytics & security", [
+          ["Support / ticketing", "Customer support and inbox", "Intercom · Zendesk · Freshdesk"],
+          ["Help centre / knowledge base", "Self-serve answers", "Part of ticketing tool · Standalone"],
+          ["Product analytics", "Usage, funnels, retention", "PostHog · Mixpanel · Amplitude · GA4"],
+          ["Error tracking", "Catch and triage bugs", "Sentry"],
+          ["Logging / APM / monitoring", "Service health", "Datadog · Grafana · CloudWatch"],
+          ["Uptime / status page", "Reliability and user communications", "BetterStack · Statuspage"],
+          ["Feature flags / experiments", "Safe rollout and A/B tests", "PostHog · LaunchDarkly · Statsig"],
+          ["Secrets management", "API keys and tokens", "AWS Secrets Manager · HashiCorp Vault"],
+          ["WAF / DDoS protection", "Attack protection", "Cloudflare"],
+          ["Consent management", "Versioned consent records", "Build · Vendor"]
+        ]]
+      ];
+      function optionChips(options, recommendation) {
+        return options.split(" · ").map(option => `<span class="chip ${recommendation && option.toLowerCase().includes(recommendation.toLowerCase()) ? "recommended" : ""}">${option}</span>`).join("");
+      }
+      function renderGroups(groups, target) {
+        document.getElementById(target).innerHTML = groups.map(([title, decisions]) => `
+          <section class="group">
+            <div class="group-head"><h3>${title}</h3><span class="count">${decisions.length} decisions</span></div>
+            <div class="cards">${decisions.map(([id, question, options, why, recommendation]) => `
+              <article class="card">
+                <div class="card-top"><span class="number">${id}</span><p class="question">${question}</p></div>
+                <p class="answer-kind">${options.includes("·") ? "Available choices" : "How to answer"}</p>
+                <div class="options">${optionChips(options, recommendation)}</div>
+                <p class="why"><strong>Why it matters:</strong> ${why}</p>
+                <div class="decision">Your decision:<span class="decision-line"></span></div>
+              </article>`).join("")}</div>
+          </section>`).join("");
+      }
+      function renderVendors(groups) {
+        document.getElementById("vendor-groups").innerHTML = groups.map(([title, rows]) => `
+          <section class="group">
+            <div class="group-head"><h3>${title}</h3><span class="count">${rows.length} services</span></div>
+            <table class="vendor-table">
+              <thead><tr><th>Service</th><th>What it is for</th><th>Candidate options</th><th>Your pick</th></tr></thead>
+              <tbody>${rows.map(([service, purpose, options]) => `<tr><td><strong>${service}</strong></td><td>${purpose}</td><td>${options}</td><td><div class="pick">.</div></td></tr>`).join("")}</tbody>
+            </table>
+          </section>`).join("");
+      }
+      renderGroups(patientGroups, "patient-groups");
+      renderGroups(otherGroups, "other-groups");
+      renderVendors(vendorGroups);
+    </script>
+  </body>
+</html>
