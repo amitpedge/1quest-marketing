@@ -22,6 +22,12 @@ npm run preview  # preview production build
 
 ## Deploy
 
-Built for **Cloudflare Pages**: connect this repo, set build command to `npm run build`, output directory to `dist`.
+### Railway (recommended for ops alongside the main app)
+
+Connect this repo in [Railway](https://railway.app/). `railway.toml` sets build (`npm run build`) and start (`npm start`). See [docs/RAILWAY_DEPLOY.md](docs/RAILWAY_DEPLOY.md).
+
+### Cloudflare Pages (alternative)
+
+Build command `npm run build`, output directory `dist`. No `npm start` — Pages serves `dist/` at the edge. `wrangler.jsonc` is for optional Wrangler deploys.
 
 The main 1Quest app (Remix + Railway) stays separate; link CTAs from here to the app when ready.
