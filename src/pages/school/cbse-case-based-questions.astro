@@ -1,0 +1,308 @@
+---
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import "../../styles/content.css";
+
+const url = "https://1quest.app/school/cbse-case-based-questions/";
+const title = "CBSE Case-Based Questions Explained for Parents | 1Quest";
+const description =
+  "Your child's test included a passage, a diagram, or a table — then questions that didn't look like the textbook. A parent decoder for CBSE case-based and source-based questions, with examples and how to practise at home.";
+const datePublished = "2026-07-24";
+const dateModified = "2026-07-24";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "CBSE case-based questions — a parent decoder.",
+  description,
+  datePublished,
+  dateModified,
+  mainEntityOfPage: url,
+  image: "https://1quest.app/og-image.png",
+  author: { "@type": "Organization", name: "1Quest", url: "https://1quest.app/" },
+  publisher: {
+    "@type": "Organization",
+    name: "1Quest",
+    logo: { "@type": "ImageObject", url: "https://1quest.app/logo-512.png" },
+  },
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://1quest.app/" },
+    { "@type": "ListItem", position: 2, name: "School guides", item: "https://1quest.app/school/" },
+    { "@type": "ListItem", position: 3, name: "CBSE case-based questions", item: url },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What are case-based questions in CBSE?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Case-based questions give your child a short real-life scenario — a factory discharge, an experiment setup, a cricket score chart — followed by two or three linked questions. Each question builds on the previous answer. They test application and reasoning, not recall.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What are source-based questions in CBSE Social Science?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Source-based questions provide a passage, cartoon, map extract, or historical document. Your child must interpret what the source shows, connect it to what they've studied, and often justify their answer with evidence from the source itself.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How many marks do case-based questions carry?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "It varies by subject and paper, but CBSE now designs roughly half of board exam questions in competency-focused formats. Case-based sections often appear as Section E in Science and Maths, and as source-based blocks in Social Science — typically 4–6 marks per sub-question.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Why does my child fail case-based questions even when they know the chapter?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Common reasons: they answer from memory instead of from the case given; they skip reading the passage carefully; they don't link sub-questions together; or they write generic textbook points that don't address the specific scenario.",
+      },
+    },
+  ],
+};
+---
+
+<HomeLayout title={title} description={description} jsonLd={[articleSchema, breadcrumb, faqSchema]}>
+  <article class="article">
+    <header class="article__header">
+      <div class="wrap-read">
+        <p class="eyebrow">1Quest for School · Guide</p>
+        <h1 class="article__title">CBSE case-based questions — a parent decoder.</h1>
+        <p class="article__meta">For parents · 7 min read · Classes 6–10</p>
+        <p class="article__lead">
+          The test had a paragraph about a village water dispute, or a diagram of an experiment,
+          or a table of rainfall data — and then questions that didn't look like anything in the
+          textbook exercise. That's a case-based or source-based question. Here's how to read
+          them, what examiners want, and how to help your child practise without writing the
+          answers for them.
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap-read prose-lg">
+      <p>
+        If you've read our guide on
+        <a href="/school/cbse-hots-explained/">CBSE HOTS</a>, you already know the board is
+        testing thinking, not memorising. Case-based and source-based questions are the most
+        visible form of that shift — and often the ones that catch parents off guard.
+      </p>
+
+      <h2>Two formats, same idea: use the material in front of you.</h2>
+      <p>
+        Both formats share one rule: <strong>the answer must come from the case or source
+        provided</strong>, connected to what your child has learned. Generic chapter answers
+        that ignore the scenario lose marks even when the facts are correct.
+      </p>
+
+      <h3>Case-based (Science, Maths, sometimes Economics)</h3>
+      <p>
+        A short scenario — real or realistic — followed by linked sub-questions. Common in
+        Science (Section E) and Maths board papers.
+      </p>
+      <p><strong>Example shape (Science, simplified):</strong></p>
+      <ul>
+        <li>
+          <em>Case:</em> A student sets up two pots with identical plants. Pot A gets sunlight
+          and water. Pot B gets water but is kept in a dark cupboard. After five days, the
+          student measures leaf colour and tests for starch.
+        </li>
+        <li><em>(i) Predict the starch test result for each pot. Explain using photosynthesis.</em></li>
+        <li><em>(ii) What variable is being tested? What is kept constant?</em></li>
+        <li><em>(iii) Suggest one improvement to make the experiment more reliable.</em></li>
+      </ul>
+      <p>
+        Notice: question (ii) assumes (i) was attempted; (iii) asks for evaluation — classic
+        HOTS progression.
+      </p>
+
+      <h3>Source-based (Social Science — History, Geography, Civics)</h3>
+      <p>
+        A passage, cartoon, map extract, or image — followed by interpretation questions.
+      </p>
+      <p><strong>Example shape (History, simplified):</strong></p>
+      <ul>
+        <li>
+          <em>Source:</em> A short excerpt from a 19th-century traveller describing a
+          crowded market under Company rule, with local weavers complaining about imported cloth.
+        </li>
+        <li><em>(i) What economic change does this source suggest?</em></li>
+        <li><em>(ii) Which chapter concept does it connect to? Name one.</em></li>
+        <li><em>(iii) Would a historian consider this source reliable? Give one reason for or against.</em></li>
+      </ul>
+      <p>
+        The child must <em>quote or paraphrase the source</em> — not just write everything they
+        remember about the Revolt of 1857.
+      </p>
+
+      <div class="callout">
+        <p>
+          The case or source is not decoration. It's the question. Answers that could apply to
+          any chapter — without referencing the material given — are the main reason children
+          lose marks here.
+        </p>
+      </div>
+
+      <h2>What examiners actually mark.</h2>
+      <p>CBSE marking schemes for case-based blocks typically reward:</p>
+      <ul>
+        <li><strong>Correct use of the given information</strong> — citing the case, not inventing a different one</li>
+        <li><strong>Conceptual link</strong> — naming the right principle (photosynthesis, demand-supply, cause of an event)</li>
+        <li><strong>Reasoning</strong> — “because…” not just “yes/no”</li>
+        <li><strong>Partial credit for method</strong> — especially in Maths, showing working even when the final number is wrong</li>
+      </ul>
+      <p>
+        They penalise: copied textbook paragraphs, answers that ignore the scenario, and
+        sub-questions answered in isolation when they're designed to connect.
+      </p>
+
+      <h2>Why tuition and textbook exercises often don't prepare them.</h2>
+      <ul>
+        <li>
+          <strong>End-of-chapter questions are direct.</strong> “Define osmosis” is not the same
+          as “predict what happens to a cell in salt water using the case described.”
+        </li>
+        <li>
+          <strong>“Important questions” lists are often recall-heavy.</strong> They rarely
+          include linked sub-questions or unfamiliar wrappers.
+        </li>
+        <li>
+          <strong>Children practise answering, not reading.</strong> Many failures are
+          comprehension failures — they misread the case and answer a different question.
+        </li>
+        <li>
+          <strong>Speed pressure.</strong> Case blocks take longer to read. Children who rush
+          treat them like short answers and skip the setup.
+        </li>
+      </ul>
+
+      <h2>A four-step method your child can learn.</h2>
+      <p>Teach this once; it works across subjects:</p>
+      <ol>
+        <li>
+          <strong>Read the case twice.</strong> First for gist, second with a pencil — underline
+          numbers, names, and anything that looks like a clue.
+        </li>
+        <li>
+          <strong>Answer in order.</strong> Sub-questions are linked. (ii) often depends on (i).
+          Don't skip ahead.
+        </li>
+        <li>
+          <strong>Point back to the case.</strong> Start answers with “According to the
+          passage…” or “In this experiment…” — forces them to stay grounded.
+        </li>
+        <li>
+          <strong>Name the concept, then apply it.</strong> “This is about [concept]. In this
+          case, [specific application].” Two sentences, full marks trajectory.
+        </li>
+      </ol>
+
+      <h2>How to practise at home (15 minutes, once a week).</h2>
+      <ul>
+        <li>
+          <strong>Use CBSE sample papers.</strong> Download from
+          <a href="https://cbseacademic.nic.in/" rel="noopener noreferrer" target="_blank">cbseacademic.nic.in</a>
+          — pick one case block per week, not the whole paper.
+        </li>
+        <li>
+          <strong>You read the case aloud; they explain what it's asking.</strong> Before they
+          write anything, ask: “What is this really about?” If they can't say it in one
+          sentence, they're not ready to answer.
+        </li>
+        <li>
+          <strong>Compare their answer to the marking scheme.</strong> CBSE publishes these.
+          Look for keywords and reasoning steps, not identical wording.
+        </li>
+        <li>
+          <strong>Swap roles.</strong> You play the student; they mark your deliberately vague
+          answer. They learn what “ignoring the source” looks like.
+        </li>
+      </ul>
+      <p>
+        One case a week for two months beats a crash session of ten cases the night before
+        pre-boards.
+      </p>
+
+      <h2>Subject-specific traps parents notice.</h2>
+      <h3>Science</h3>
+      <ul>
+        <li>Confusing “what happened” with “why it happened”</li>
+        <li>Ignoring controlled variables in experiment cases</li>
+        <li>Drawing diagrams that don't match the setup described</li>
+      </ul>
+      <h3>Maths</h3>
+      <ul>
+        <li>Treating a word-problem case as English homework — missing the maths entirely</li>
+        <li>Not showing units or steps (marks lost even with right logic)</li>
+        <li>Using a formula from a different chapter because it “looks similar”</li>
+      </ul>
+      <h3>Social Science</h3>
+      <ul>
+        <li>Writing everything they know about a topic instead of answering about the source</li>
+        <li>Missing map or cartoon details (labels, arrows, dates)</li>
+        <li>Opinion without evidence — “I think…” with no quote from the passage</li>
+      </ul>
+
+      <h2>Where 1Quest helps.</h2>
+      <p>
+        Case-based questions need slow, checked reasoning — not a pasted answer. A
+        <a href="/school/patient-ai-tutor/">patient AI tutor</a> can walk through a sample case
+        step by step: read the scenario, identify the concept, attempt (i), check understanding,
+        then move to (ii). That's the loop generic chatbots skip.
+      </p>
+      <p>
+        And because case practice is weekly habit, not a one-off panic,
+        <a href="/school/weekly-learning-plan/">locking a plan with you</a> — one case block
+        plus chapter revision — beats random pre-exam cramming.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Are case-based questions only in board exams?</h3>
+      <p>
+        No. CBSE requires at least one competency-based periodic assessment per year in school.
+        Your child may see these in unit tests and UT weeks too.
+      </p>
+      <h3>Do all subjects have them?</h3>
+      <p>
+        Most common in Science, Maths, and Social Science. English may use unseen passages
+        with similar logic. Languages and literature use comprehension-style blocks rather than
+        “cases” per se.
+      </p>
+      <h3>Should my child attempt Section E first or last?</h3>
+      <p>
+        Usually last — case blocks take time to read. But if your child excels at application
+        and panics on recall-heavy sections, some teachers suggest attempting the case block
+        while fresh. Ask what works for your child's temperament.
+      </p>
+      <h3>Can they prepare from YouTube?</h3>
+      <p>
+        YouTube explains concepts well. It rarely drills the skill of <em>reading an unfamiliar
+        case and answering from it</em>. That only comes from practising actual question formats.
+      </p>
+    </div>
+  </article>
+
+  <section class="closing">
+    <div class="shell closing__inner">
+      <h2 class="closing__title">Build the habit of thinking from the case, not the textbook.</h2>
+      <p class="closing__sub">
+        1Quest walks through scenarios patiently — explain, check, try again — until your child
+        can handle the next unfamiliar question alone.
+      </p>
+      <a class="btn btn--solid" href="/contact/">Start free</a>
+    </div>
+  </section>
+</HomeLayout>
